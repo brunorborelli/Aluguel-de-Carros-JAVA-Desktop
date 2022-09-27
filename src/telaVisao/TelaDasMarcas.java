@@ -4,22 +4,46 @@
  */
 package telaVisao;
 
-import projetoid.GeradorIdentificador;
+import com.nohair.controle.IMarcaControle;
+import com.nohair.controle.MarcaControle;
+import com.nohair.modelos.Marca;
+import com.nohair.util.id.GeradorID;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
  * @author dhion
  */
 public class TelaDasMarcas extends javax.swing.JFrame {
-
+ IMarcaControle marcaControle = new MarcaControle();
     /**
      * Creates new form TelaDasMarcas
      */
     public TelaDasMarcas() {
+       
         initComponents();
         this.jId.setEnabled(false);
         this.jUrl.setEnabled(false);
-        this.jLogo.setEnabled(false);
+        this.setLocationRelativeTo(null);
+         try {
+             ArrayList<Marca> lista = marcaControle.listagem();
+             if(!lista.isEmpty()){
+                imprimirDadosNaGrid(marcaControle.listagem());
+             }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(this, erro);
+            
+            
+        }
+       
     }
 
     /**
@@ -41,13 +65,12 @@ public class TelaDasMarcas extends javax.swing.JFrame {
         jDescr = new javax.swing.JTextField();
         jUrl = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
         jLogo = new javax.swing.JLabel();
         jIncluir = new javax.swing.JButton();
         jAlterar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMarcas = new javax.swing.JTable();
-        jBuscar = new javax.swing.JButton();
+        jProcurar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,18 +127,7 @@ public class TelaDasMarcas extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Logo");
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-        );
+        jLogo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jIncluir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jIncluir.setText("Incluir");
@@ -151,11 +163,11 @@ public class TelaDasMarcas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableMarcas);
 
-        jBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jBuscar.setText("Buscar");
-        jBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jProcurar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jProcurar.setText("Procurar");
+        jProcurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBuscarActionPerformed(evt);
+                jProcurarActionPerformed(evt);
             }
         });
 
@@ -169,31 +181,33 @@ public class TelaDasMarcas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jDescr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-                                    .addComponent(jId, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jUrl)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jDescr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                                        .addComponent(jId, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jUrl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(144, 144, 144)
                                 .addComponent(jIncluir)
                                 .addGap(18, 18, 18)
                                 .addComponent(jAlterar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBuscar)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jProcurar)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
+                                .addGap(82, 82, 82)
                                 .addComponent(jLabel5))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(39, 39, 39)
+                                .addComponent(jLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(58, 58, 58)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -205,9 +219,9 @@ public class TelaDasMarcas extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jDescr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,39 +229,84 @@ public class TelaDasMarcas extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jIncluir)
                             .addComponent(jAlterar)
-                            .addComponent(jBuscar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(70, 70, 70)
+                            .addComponent(jProcurar)))
+                    .addComponent(jLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 178, Short.MAX_VALUE))
+                .addGap(0, 169, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void imprimirDadosNaGrid(ArrayList<Marca> listaDeMarcas){
+        try {
+            DefaultTableModel model =  (DefaultTableModel) jTableMarcas.getModel();
+            //Limpa a tabela 
+            model.setNumRows(0);
+            Iterator<Marca> lista = listaDeMarcas.iterator();
+            while(lista.hasNext()){
+                String[] saida= new String[3];
+                Marca aux = lista.next();
+                saida[0]= aux.getId()+"";
+                saida[1]= aux.getDescricao();
+                saida[2] = aux.getUrl();
+                //Incluir nova linha na Tabela
+                model.addRow(saida);
+         } 
+        } catch(Exception erro){
+            JOptionPane.showMessageDialog(this, erro.getMessage());
+      } 
+               
+    }
     private void jIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIncluirActionPerformed
-        try{
-        //GeradorIdentificador.criarArquivoDeID();
-            System.out.println( GeradorIdentificador.getID());
-       
+       try {
+           
+            Marca objeto = new Marca(0,jDescr.getText(),jUrl.getText());
+            marcaControle.incluir(objeto);
+            jDescr.setText("");
+            imprimirDadosNaGrid(marcaControle.listagem());
+          
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(this, erro.getMessage());
+           
         }
-        catch(Exception e){e.getMessage();}
             
     }//GEN-LAST:event_jIncluirActionPerformed
 
     private void jAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAlterarActionPerformed
-        // TODO add your handling code here:
+        try {
+             ArrayList<Marca> lista = marcaControle.listagem();
+             if(lista.isEmpty()){
+                imprimirDadosNaGrid(marcaControle.listagem());
+                JOptionPane.showMessageDialog(this, "teste");
+             }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(this, erro);
+            
+            
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jAlterarActionPerformed
 
-    private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBuscarActionPerformed
+    private void jProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProcurarActionPerformed
+        try {
+            JFileChooser fc = new JFileChooser();
+            fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fc.showOpenDialog(this);
+            File arquivo = fc.getSelectedFile();
+            String nomeDoArquivo = arquivo.getPath();
+            jUrl.setText(nomeDoArquivo);
+            ImageIcon iconLogo = new ImageIcon(nomeDoArquivo);
+            iconLogo.setImage(iconLogo.getImage().getScaledInstance(
+            jLogo.getWidth(),jLogo.getHeight(),1));
+            jLogo.setIcon(iconLogo);
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(this, erro);
+        }
+    }//GEN-LAST:event_jProcurarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,7 +346,6 @@ public class TelaDasMarcas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAlterar;
-    private javax.swing.JButton jBuscar;
     private javax.swing.JTextField jDescr;
     private javax.swing.JTextField jId;
     private javax.swing.JButton jIncluir;
@@ -299,7 +357,7 @@ public class TelaDasMarcas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLogo;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jProcurar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableMarcas;
     private javax.swing.JTextField jUrl;
