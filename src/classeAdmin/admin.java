@@ -12,8 +12,8 @@ public class admin {
     
     //Atributos
     
-    private String usuarioAdm;
-    private String senhaAdm;
+    public String usuarioAdm;
+    public String senhaAdm;
     
     
     //Construtor
