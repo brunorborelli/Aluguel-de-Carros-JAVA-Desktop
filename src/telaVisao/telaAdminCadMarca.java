@@ -25,12 +25,12 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author dhion
  */
-public class TelaDasMarcas extends javax.swing.JFrame {
+public class telaAdminCadMarca extends javax.swing.JFrame {
  IMarcaControle marcaControle = new MarcaControle();
     /**
      * Creates new form TelaDasMarcas
      */
-    public TelaDasMarcas() {
+    public telaAdminCadMarca() {
        
         initComponents();
         this.jId.setEnabled(false);
@@ -347,21 +347,23 @@ public class TelaDasMarcas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaDasMarcas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaAdminCadMarca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaDasMarcas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaAdminCadMarca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaDasMarcas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaAdminCadMarca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaDasMarcas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaAdminCadMarca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaDasMarcas().setVisible(true);
+                new telaAdminCadMarca().setVisible(true);
             }
         });
     }
