@@ -67,7 +67,7 @@
                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,11 +100,11 @@
                           <Component id="jProcurar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jLogo" pref="123" max="32767" attributes="0"/>
+                  <Component id="jLogo" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="88" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="204" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="169" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="85" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -263,7 +263,7 @@
                 <Column editable="true" title="Identificador" type="java.lang.Integer"/>
                 <Column editable="true" title="Descri&#xe7;&#xe3;o" type="java.lang.String"/>
                 <Column editable="true" title="Url" type="java.lang.String"/>
-                <Column editable="true" title="Logo" type="java.lang.String"/>
+                <Column editable="true" title="Logo" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -283,13 +283,14 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="200" minWidth="200" prefWidth="200" resizable="true">
                   <Title/>
                   <Editor/>
-                  <Renderer/>
+                  <Renderer editor="org.netbeans.modules.form.RADConnectionPropertyEditor"/>
                 </Column>
               </TableColumnModel>
             </Property>
+            <Property name="rowHeight" type="int" value="100"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>

@@ -8,13 +8,16 @@ import com.nohair.controle.IMarcaControle;
 import com.nohair.controle.MarcaControle;
 import com.nohair.modelos.Marca;
 import com.nohair.util.id.GeradorID;
+import com.nohair.util.renderizador.RendererIcon;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 
 
@@ -154,14 +157,21 @@ public class TelaDasMarcas extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
+        jTableMarcas.setRowHeight(100);
         jScrollPane1.setViewportView(jTableMarcas);
+        if (jTableMarcas.getColumnModel().getColumnCount() > 0) {
+            jTableMarcas.getColumnModel().getColumn(3).setMinWidth(200);
+            jTableMarcas.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTableMarcas.getColumnModel().getColumn(3).setMaxWidth(200);
+            jTableMarcas.getColumnModel().getColumn(3).setCellRenderer(null);
+        }
 
         jProcurar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jProcurar.setText("Procurar");
@@ -208,7 +218,7 @@ public class TelaDasMarcas extends javax.swing.JFrame {
                                 .addGap(39, 39, 39)
                                 .addComponent(jLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(58, 58, 58)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,28 +244,40 @@ public class TelaDasMarcas extends javax.swing.JFrame {
                             .addComponent(jIncluir)
                             .addComponent(jAlterar)
                             .addComponent(jProcurar)))
-                    .addComponent(jLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                    .addComponent(jLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 169, Short.MAX_VALUE))
+                .addGap(0, 85, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void imprimirDadosNaGrid(ArrayList<Marca> listaDeMarcas){
         try {
+            RendererIcon icon = new RendererIcon();
+            
             DefaultTableModel model =  (DefaultTableModel) jTableMarcas.getModel();
             //Limpa a tabela 
+           
+            jTableMarcas.getColumnModel().getColumn(3).setCellRenderer(icon);
+             
+             
             model.setNumRows(0);
             Iterator<Marca> lista = listaDeMarcas.iterator();
+           
             while(lista.hasNext()){
-                String[] saida= new String[3];
                 Marca aux = lista.next();
+                Object[] saida= new Object[4];
+               
                 saida[0]= aux.getId()+"";
                 saida[1]= aux.getDescricao();
                 saida[2] = aux.getUrl();
+                
                 //Incluir nova linha na Tabela
                 model.addRow(saida);
+                           
+                
+                  
          } 
         } catch(Exception erro){
             JOptionPane.showMessageDialog(this, erro.getMessage());
