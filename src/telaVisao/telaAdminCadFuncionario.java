@@ -4,7 +4,19 @@
  */
 package telaVisao;
 
-import classeAdmin.admin;
+import com.nohair.controle.AdminControle;
+import com.nohair.controle.IAdminControle;
+import com.nohair.modelos.admin;
+import com.nohair.modelos.admin;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -12,12 +24,25 @@ import classeAdmin.admin;
  * @author bruno
  */
 public class telaAdminCadFuncionario extends javax.swing.JFrame {
+    IAdminControle adminControle = new AdminControle();
 
     /**
      * Creates new form telaAdminCadFuncionario
      */
     public telaAdminCadFuncionario() {
         initComponents();
+        this.setLocationRelativeTo(null);
+         try {
+             ArrayList<admin> lista = adminControle.listagem();
+             if(!lista.isEmpty()){
+                //imprimirDadosNaGrid(adminControle.listagem());
+             }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(this, erro);
+            
+            
+        }
+        
     }
 
     /**
@@ -130,20 +155,36 @@ public class telaAdminCadFuncionario extends javax.swing.JFrame {
 
     private void jButtonCadFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadFunActionPerformed
         // TODO add your handling code here:
-        /*admin usuario = new admin (jTextFieldUsuarioCadNome.getText(), jTextFieldSenhaFunc.getText());
-        jTextFieldDisplay.setText(usuario.usuarioAdm + usuario.senhaAdm);
         
-        admin [] adminArray = new admin[1];
-        adminArray[0] = usuario;
-        
-        for(int i=0; i<adminArray.length; i++){
-            
-            String outputText = adminArray[i].getUsuarioAdm() + ";" + adminArray[i].getSenhaAdm();
-            
-            saveTofile("./src/dataSetFiles/cadastroADM.txt", outputText, true);
-            
-        }
+        /*
+        admin usuario = new admin();
+        usuario.usuarioAdm = jTextFieldUsuarioCadNome.getText();
+        usuario.senhaAdm = jTextFieldSenhaFunc.getText();
         */
+        
+       /*ObjectOutputStream out;
+        try {
+            out = new ObjectOutputStream(new FileOutputStream("C:\\Users\\bruno\\Documents\\NetBeansProjects\\locaGyn\\src\\com\\nohair\\dados\\txt\\adminCredentials.txt"));
+            out.writeObject(usuario);
+            //System.out.println(new File("adminCredentials.txt").getAbsolutePath());
+        } catch (IOException ex) {
+            Logger.getLogger(telaAdminCadFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       */
+        try {
+           
+            admin objeto = new admin(0,jTextFieldUsuarioCadNome.getText(),jTextFieldSenhaFunc.getText());
+            adminControle.incluir(objeto);
+            jTextFieldUsuarioCadNome.setText("");
+            jTextFieldSenhaFunc.setText("");
+            //imprimirDadosNaGrid(adminControle.listagem());
+          
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(this, erro.getMessage());
+           
+        }
+             
+        
         
         
     }//GEN-LAST:event_jButtonCadFunActionPerformed

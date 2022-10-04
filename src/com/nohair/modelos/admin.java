@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package classeAdmin;
+package com.nohair.modelos;
+
+import java.io.Serializable;
 
 /**
  *
@@ -12,16 +14,29 @@ public class admin {
     
     //Atributos
     
-    public String usuarioAdm;
-    public String senhaAdm;
+    private int id = 0;
+    private String usuarioAdm = "";
+    private String senhaAdm = "";
+
+    
     
     
     //Construtor
 
-    public admin(String usuarioAdm, String senhaAdm) {
+    public admin(int id, String usuarioAdm, String senhaAdm) {
+        this.id = id;
         this.usuarioAdm = usuarioAdm;
         this.senhaAdm = senhaAdm;
     }
+    
+    public admin(){
+        
+    }
+
+    
+   
+
+    
     
     //Getters & Setters
 
@@ -40,6 +55,21 @@ public class admin {
     public void setSenhaAdm(String senhaAdm) {
         this.senhaAdm = senhaAdm;
     }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    //ToString
+
+    @Override
+    public String toString() {
+        return  id + ";" + usuarioAdm + ";" + senhaAdm ;
+    }
+
     
     
     

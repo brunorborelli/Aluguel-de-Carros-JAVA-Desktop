@@ -4,8 +4,9 @@
  */
 package telaVisao;
 
-import classeAdmin.admin;
+import com.nohair.modelos.admin;
 import javax.swing.JOptionPane;
+import telaVisao.telaAdminOpcoes;
 
 /**
  *
@@ -13,7 +14,10 @@ import javax.swing.JOptionPane;
  */
 public class telaAdminLogin extends javax.swing.JFrame {
     
-    admin admin = new admin ("admin", "admin");
+    //admin admin = new admin();
+    
+    
+    
     
     
 
@@ -129,10 +133,14 @@ public class telaAdminLogin extends javax.swing.JFrame {
             Vamos pegar o usuario e a senha do administrador e validar
         */
         
-        String usuarioAdm = CampoUsuarioAdm.getText();
-        String senhaAdm = String.valueOf(CampoSenhaAdm.getPassword());
+      /* admin.*/// String usuarioAdm="admin";
+      /* admin.*/ //String senhaAdm= "admin";
         
-        if(usuarioAdm.equals(admin.getUsuarioAdm()) && senhaAdm.equals(admin.getSenhaAdm())){
+        
+        // String usuarioAdm = CampoUsuarioAdm.getText();
+        // String senhaAdm = String.valueOf(CampoSenhaAdm.getPassword());
+        
+        /*if( "admin".equals(usuarioAdm) && senhaAdm=="admin" ){   //usuarioAdm.equals(admin.getUsuarioAdm()) && senhaAdm.equals(admin.getSenhaAdm())){
             telaAdminOpcoes f = new telaAdminOpcoes();
             this.dispose();
             f.setVisible(true);
@@ -140,6 +148,7 @@ public class telaAdminLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Usuario ou Senha incorreta");
         }
         
+        */
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
