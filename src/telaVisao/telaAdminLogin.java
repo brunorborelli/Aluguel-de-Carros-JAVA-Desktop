@@ -5,6 +5,12 @@
 package telaVisao;
 
 import com.nohair.modelos.admin;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import telaVisao.telaAdminOpcoes;
 
@@ -133,20 +139,77 @@ public class telaAdminLogin extends javax.swing.JFrame {
             Vamos pegar o usuario e a senha do administrador e validar
         */
         
-      /* admin.*/String usuarioAdm="admin";
-      /* admin.*/String senhaAdm= "admin";
+      /* admin.*///String usuarioAdm="admin";
+      /* admin.*///String senhaAdm= "admin";
         
         
         // String usuarioAdm = CampoUsuarioAdm.getText();
         // String senhaAdm = String.valueOf(CampoSenhaAdm.getPassword());
         
-        if( "admin".equals(usuarioAdm) && senhaAdm=="admin" ){   //usuarioAdm.equals(admin.getUsuarioAdm()) && senhaAdm.equals(admin.getSenhaAdm())){
+        /*if( "admin".equals(usuarioAdm) && senhaAdm=="admin" ){   //usuarioAdm.equals(admin.getUsuarioAdm()) && senhaAdm.equals(admin.getSenhaAdm())){
             telaAdminOpcoes f = new telaAdminOpcoes();
             this.dispose();
             f.setVisible(true);
         }else {
             JOptionPane.showMessageDialog(this, "Usuario ou Senha incorreta");
-        }
+        }*/
+        
+        
+        /*try {
+            BufferedReader b;
+            b = new BufferedReader(new FileReader("<path to file>"));
+            String[] user=new String[30];
+            String line="";
+            while ((line = b.readLine()) != null) {
+             user[i]=line; 
+             System.out.println(user[1]);
+             i++;}
+            } catch (FileNotFoundException ex) {
+            Logger.getLogger(telaAdminLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        
+        
+        
+        try {
+                
+                String s;
+                String bypassid = "guest";
+                String bypasspw = "guest";
+                String[] array;
+                boolean isLogin= false; 
+                BufferedReader br = new BufferedReader(new FileReader("./src/com/nohair/dados/txt/Admin.txt"));
+                while((s=br.readLine())!=null) {
+                    array=s.split(";");
+                    if(CampoUsuarioAdm.getText().equals(array[1])&&CampoSenhaAdm.getText().equals(array[2])){
+                        //JOptionPane.showMessageDialog(null, "erro1");
+                        telaAdminOpcoes f = new telaAdminOpcoes();
+                        this.dispose();                     // Faz com que a tela feche ao abrir outra
+                        f.setLocationRelativeTo(null);      // Comando para centralizar a aplicação no centro do monitor
+                        f.setVisible(true);
+                        isLogin = true;
+                        break;
+                    } else if(array.length != 0 && bypassid.equals(CampoUsuarioAdm.getText())&&bypasspw.equals(CampoSenhaAdm.getText())){
+                        JOptionPane.showMessageDialog(null, "erro2");
+                        isLogin = true;
+                       
+                        break;
+                    } 
+                }
+                if(isLogin == false) {
+                    JOptionPane.showMessageDialog(this, "Usuario ou Senha incorreta");
+                        telaInicio f = new telaInicio();
+                        this.dispose();
+                        f.setLocationRelativeTo(null);      // Comando para centralizar a aplicação no centro do monitor
+                        f.setVisible(true);
+                        
+                }
+                //br.close();
+            } catch (IOException e10) {
+                // TODO Auto-generated catch block
+                
+                
+                e10.printStackTrace();
+            }
         
         
     }//GEN-LAST:event_btnLoginActionPerformed

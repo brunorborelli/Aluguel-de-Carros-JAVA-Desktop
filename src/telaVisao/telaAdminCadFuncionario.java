@@ -177,6 +177,7 @@ public class telaAdminCadFuncionario extends javax.swing.JFrame {
             adminControle.incluir(objeto);
             jTextFieldUsuarioCadNome.setText("");
             jTextFieldSenhaFunc.setText("");
+            JOptionPane.showMessageDialog(this,"Usuario Cadastrado com sucesso");
             //imprimirDadosNaGrid(adminControle.listagem());
           
         } catch (Exception erro) {
@@ -193,7 +194,8 @@ public class telaAdminCadFuncionario extends javax.swing.JFrame {
         // TODO add your handling code here:
         
          telaAdminOpcoes f = new telaAdminOpcoes();
-            this.dispose();
+            this.dispose();                     // Fechar a tela ao abrir outra janela
+            f.setLocationRelativeTo(null);      // Comando para centralizar a aplicação no centro do monitor
             f.setVisible(true);
         
     }//GEN-LAST:event_jButton1ActionPerformed
