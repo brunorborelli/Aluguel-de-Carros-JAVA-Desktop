@@ -24,12 +24,14 @@ public class Clientes {
     private String Estado = "";
     private String Moto_Auto = "";
     private String CNH_Moto_Auto = "";
+    private String Caminho_Foto = "";
         
     public Clientes(){
     }
     
     public Clientes(int id, String NomeCompleto, String CPF, String CNH, String Valid_CNH, String Data_Nasc, String Telefone,
-            String Endereco, String Bairro, String CEP, String Cidade, String Estado, String Moto_Auto, String CNH_Moto_Auto ){
+            String Endereco, String Bairro, String CEP, String Cidade, String Estado, String Moto_Auto, String CNH_Moto_Auto, 
+            String Caminho_Foto){
         
         this.id = id;
         this.NomeCompleto = NomeCompleto;
@@ -45,6 +47,7 @@ public class Clientes {
         this.Estado = Estado;
         this.Moto_Auto = Moto_Auto;
         this.CNH_Moto_Auto = CNH_Moto_Auto;
+        this.Caminho_Foto = Caminho_Foto;
     }
     
     public int getId() {
@@ -158,12 +161,22 @@ public class Clientes {
         this.CNH_Moto_Auto = CNH_Moto_Auto;
     }
 
+    public String getCaminho_Foto() {
+        return Caminho_Foto;
+    }
+
+    public void setCaminho_Foto(String Caminho_Foto) {
+        this.Caminho_Foto = Caminho_Foto;
+    }
+
+    
    
     @Override
     public String toString() {
         return id + ";" + NomeCompleto + ";" + CPF + ";" + CNH + ";" + Valid_CNH 
             + ";"+ Data_Nasc + ";" + Telefone + ";" + Endereco + ";" + Bairro 
-            + ";" + CEP + ";" + Cidade + ";" + Estado + ";" + Moto_Auto + ";" + CNH_Moto_Auto + ";";
+            + ";" + CEP + ";" + Cidade + ";" + Estado + ";" + Moto_Auto + ";" + CNH_Moto_Auto + ";"
+            + Caminho_Foto + ";";
     }
     
 }

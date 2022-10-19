@@ -90,6 +90,8 @@ public class ClientesDao implements IClientesDao{
                     objetoClientes.setMoto_Auto(vetorString[12]);
                 
                     objetoClientes.setCNH_Moto_Auto(vetorString[13]);
+                    
+                    objetoClientes.setCaminho_Foto(vetorString[14]);
                 
                     listaDeClientes.add(objetoClientes);
                 }
