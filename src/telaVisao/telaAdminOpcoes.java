@@ -29,7 +29,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Bt_Cad_Cliente = new javax.swing.JButton();
         Bt_Buscar_Cliente = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -55,11 +55,11 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton3.setText("Cadastrar Cliente");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Bt_Cad_Cliente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Bt_Cad_Cliente.setText("Cadastrar Cliente");
+        Bt_Cad_Cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Bt_Cad_ClienteActionPerformed(evt);
             }
         });
 
@@ -101,7 +101,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(Bt_Cad_Cliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton6)
@@ -120,7 +120,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(Bt_Cad_Cliente)
                     .addComponent(Bt_Buscar_Cliente))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -149,9 +149,11 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void Bt_Cad_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Cad_ClienteActionPerformed
+            TelaDeClientes b = new TelaDeClientes();
+            this.dispose();
+            b.setVisible(true);
+    }//GEN-LAST:event_Bt_Cad_ClienteActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -166,9 +168,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void Bt_Buscar_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Buscar_ClienteActionPerformed
-            TelaDeClientes b = new TelaDeClientes();
-            this.dispose();
-            b.setVisible(true);
+
     }//GEN-LAST:event_Bt_Buscar_ClienteActionPerformed
 
     /**
@@ -208,9 +208,9 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bt_Buscar_Cliente;
+    private javax.swing.JButton Bt_Cad_Cliente;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;

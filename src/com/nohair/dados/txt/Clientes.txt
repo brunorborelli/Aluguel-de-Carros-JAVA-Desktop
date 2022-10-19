@@ -1,5 +1,6 @@
-1;huhbh;hyty;rctfctf;sd;sd;sd;fctftf;sd;d;d;sd;sd;d;
-2;Igor Macedo;75080273100;425;21.03.1994;21.03.1994;(62)9 9820-9756;Alameda Presidente Jefferson;Faiçalville;74350770;Goiania;Goias;Cassio;451523;
-3;Teste;750;986;21.03.2023;21.03.1994;(62)9 98209756;Presidente Jefferson;Faiçalville;74350770;Goiania;Goias;Cassio;575632;
-4;Testando;28;35;3256;356;356;563;36;36;356;236;2356;356;
-5;dafafafa;123124141;1313131231;141414;141414;14141;dada;dadad;1311;dadad;adadad;41414;14141;
+1;huhbh;hyty;rctfctf;sd;sd;sd;fctftf;sd;d;d;sd;sd;d;256;
+2;Igor Macedo;75080273100;425;21.03.1994;21.03.1994;(62)9 9820-9756;Alameda Presidente Jefferson;Faiçalville;74350770;Goiania;Goias;Cassio;451523;452;
+3;Teste;750;986;21.03.2023;21.03.1994;(62)9 98209756;Presidente Jefferson;Faiçalville;74350770;Goiania;Goias;Cassio;575632;56;
+4;Testando;28;35;3256;356;356;563;36;36;356;236;2356;356;75;
+5;dafafafa;123124141;1313131231;141414;141414;14141;dada;dadad;1311;dadad;adadad;41414;14141;542;
+6;Cliente 01;75080273100;52;21.03.2023;21.03.1994;(62)998209756;Alameda Presidente Jefferson;Faiçalville;74350770;Goiania;Goias;Cassio;22;/home/Igor/Downloads/GitHub/Aluguel-de-Carros-JAVA-Desktop/src/com/nohair/fotoCliente/Cliente01.png;
