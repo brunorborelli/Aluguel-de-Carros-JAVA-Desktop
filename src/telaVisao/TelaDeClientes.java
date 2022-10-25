@@ -6,7 +6,7 @@ package telaVisao;
 
 
 import com.nohair.controle.ClientesControle;
-import com.nohair.util.id.GeradorIdentificadorClientes;
+import com.nohair.util.id.GeradorID;
 import javax.swing.JOptionPane;
 import com.nohair.modelos.Clientes;
 import com.nohair.persistencia.ClientesDao;
@@ -24,11 +24,30 @@ import javax.swing.table.TableRowSorter;
 
 
 public class TelaDeClientes extends javax.swing.JFrame {
+    
+    
+    
     //Atributos 
     IClientesControle ClientesControle = new ClientesControle();
 
     public TelaDeClientes(){
         initComponents();
+        
+        // Inicializa Vazio - Para cair no if do Incluir Cliente
+        Txt_NomeCompleto.setText("");
+        Txt_CPF.setText("");
+        Txt_CNH.setText("");
+        Txt_Valid_CNH.setText(""); 
+        Txt_Data_Nasc.setText(""); 
+        Txt_Telef.setText("");
+        Txt_Endereco.setText("");
+        Txt_Bairro.setText("");
+        Txt_CEP.setText("");
+        Txt_Cidade.setText("");
+        Txt_Estado.setText("");
+        Txt_Mot_Auto.setText("");
+        Txt_CNH_Auto.setText("");
+        Txt_Caminho_Foto.setText("");
         
         DefaultTableModel modelo = (DefaultTableModel) jTableClientes.getModel();
         jTableClientes.setRowSorter(new TableRowSorter(modelo));
@@ -245,6 +264,7 @@ public class TelaDeClientes extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Caminho da Foto:");
 
+        Txt_Caminho_Foto.setEditable(false);
         Txt_Caminho_Foto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -497,9 +517,15 @@ public class TelaDeClientes extends javax.swing.JFrame {
     
     
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
-        // TODO add your handling code here:
-        try {
-            
+        
+    // Se tiver algum campo vazio o mesmo gerar mensagem "Para Correçao " 
+    
+    if(!Txt_NomeCompleto.getText().equals("") && !Txt_CPF.getText().equals("") && !Txt_CNH.getText().equals("") && !Txt_Valid_CNH.getText().equals("")
+       && !Txt_Data_Nasc.getText().equals("") && !Txt_Telef.getText().equals("") && !Txt_Endereco.getText().equals("") && !Txt_Bairro.getText().equals("")    
+       && !Txt_CEP.getText().equals("") && !Txt_Cidade.getText().equals("")  && !Txt_Estado.getText().equals("") && Txt_Mot_Auto.getText().equals("")
+       && !Txt_CNH_Auto.getText().equals("")  && !Txt_Caminho_Foto.getText().equals("")){
+               
+        try {               
             Clientes objeto = new Clientes(0,Txt_NomeCompleto.getText(),Txt_CPF.getText(),Txt_CNH.getText(),
                Txt_Valid_CNH.getText(), Txt_Data_Nasc.getText(), Txt_Telef.getText(),Txt_Endereco.getText(), 
                Txt_Bairro.getText(),Txt_CEP.getText(),Txt_Cidade.getText(),Txt_Estado.getText(),Txt_Mot_Auto.getText(),
@@ -523,11 +549,18 @@ public class TelaDeClientes extends javax.swing.JFrame {
             Txt_Estado.setText("");
             Txt_Mot_Auto.setText("");
             Txt_CNH_Auto.setText("");
-            
+            Txt_Caminho_Foto.setText("");
+            Area_Logo.setText("");          
         } 
         catch (Exception erro) {
             JOptionPane.showMessageDialog(this, erro.getMessage());
-        }
+        }      
+    }  
+    else {
+        // Se houver campo vazio no cadastro e mostrado uma mensagem !
+        JOptionPane.showMessageDialog(this, "Campo Vazio");
+        }  
+        
     }//GEN-LAST:event_jButtonIncluirActionPerformed
 
     private void Bt_Add_FotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Add_FotoActionPerformed
