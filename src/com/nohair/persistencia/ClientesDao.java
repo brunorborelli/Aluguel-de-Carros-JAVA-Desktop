@@ -4,8 +4,8 @@
  */
 package com.nohair.persistencia;
 
-import com.nohair.util.id.GeradorIdentificadorClientes;
 import com.nohair.modelos.Clientes;
+import com.nohair.util.id.GeradorID;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -33,7 +33,7 @@ public class ClientesDao implements IClientesDao{
             //Criar o buffer do arquivo
             BufferedWriter bw =new BufferedWriter(fw);
             // Incluindo o id no objeto ******
-            objeto.setId(GeradorIdentificadorClientes.getID());
+            objeto.setId(GeradorID.getID());
             //Escreve no arquivo
             bw.write(objeto.toString()+"\n");
             //fecha o arquivo
