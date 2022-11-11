@@ -12,8 +12,11 @@ import com.nohair.persistencia.IAdminDao;
 import com.nohair.util.id.GeradorID;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -30,7 +33,7 @@ public class AdminDao implements IAdminDao {
     @Override
     public void incluir(admin objeto) throws Exception {
         try{
-            //cria o arquivo
+            //Escreve o arquivo
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco,true);
             //Criar o buffer do arquivo
             BufferedWriter bw =new BufferedWriter(fw);
@@ -41,6 +44,7 @@ public class AdminDao implements IAdminDao {
             //fecha o arquivo
             bw.close();		
       }catch(Exception erro){
+          
          throw erro;
       }
     }
@@ -70,6 +74,18 @@ public class AdminDao implements IAdminDao {
         } catch(Exception erro){
          throw erro;
         }
+        
+        
+        }
+        public void ChecarTxt(){
+            try{
+                File Admin = new File("./src/com/nohair/dados/txt/Admin.txt");
+                if(!Admin.exists()){
+                    Admin.createNewFile();
+                }
+            }catch(IOException ex){
+                
+            }
     }
     
     

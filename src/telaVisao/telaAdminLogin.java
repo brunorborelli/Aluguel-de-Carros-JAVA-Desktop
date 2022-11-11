@@ -5,6 +5,7 @@
 package telaVisao;
 
 import com.nohair.modelos.admin;
+import com.nohair.persistencia.AdminDao;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -32,6 +33,8 @@ public class telaAdminLogin extends javax.swing.JFrame {
      */
     public telaAdminLogin() {
         initComponents();
+        AdminDao objeto = new AdminDao();
+        objeto.ChecarTxt();
     }
 
     /**
@@ -167,8 +170,10 @@ public class telaAdminLogin extends javax.swing.JFrame {
             } catch (FileNotFoundException ex) {
             Logger.getLogger(telaAdminLogin.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        
-        
+        /*telaAdminOpcoes f = new telaAdminOpcoes();
+            this.dispose();
+            f.setVisible(true);
+        */
         
         try {
                 
@@ -205,7 +210,7 @@ public class telaAdminLogin extends javax.swing.JFrame {
                 }
                 //br.close();
             } catch (IOException e10) {
-                // TODO Auto-generated catch block
+                
                 
                 
                 e10.printStackTrace();
