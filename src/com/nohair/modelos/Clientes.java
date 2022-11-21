@@ -13,40 +13,35 @@ public class Clientes {
     private int id = 0;
     private String NomeCompleto = "";
     private String CPF = "";
-    private String CNH = "";
-    private String Valid_CNH = "";
+    private String RG = "";
     private String Data_Nasc = "";
     private String Telefone = "";
+    private String email = "";
     private String Endereco = "";
     private String Bairro = "";
     private String CEP = "";
     private String Cidade = "";
     private String Estado = "";
-    private String Moto_Auto = "";
-    private String CNH_Moto_Auto = "";
     private String Caminho_Foto = "";
         
     public Clientes(){
     }
     
-    public Clientes(int id, String NomeCompleto, String CPF, String CNH, String Valid_CNH, String Data_Nasc, String Telefone,
-            String Endereco, String Bairro, String CEP, String Cidade, String Estado, String Moto_Auto, String CNH_Moto_Auto, 
-            String Caminho_Foto){
+    public Clientes(int id, String NomeCompleto, String CPF, String RG, String Data_Nasc, String Telefone, String email,
+            String Endereco, String Bairro, String CEP, String Cidade, String Estado, String Caminho_Foto){
         
         this.id = id;
         this.NomeCompleto = NomeCompleto;
         this.CPF = CPF;
-        this.CNH = CNH;
-        this.Valid_CNH = Valid_CNH;
+        this.RG = RG;
         this.Data_Nasc = Data_Nasc;
         this.Telefone = Telefone;
+        this.email = email;
         this.Endereco = Endereco;
         this.Bairro = Bairro;
         this.CEP = CEP;
         this.Cidade = Cidade;
         this.Estado = Estado;
-        this.Moto_Auto = Moto_Auto;
-        this.CNH_Moto_Auto = CNH_Moto_Auto;
         this.Caminho_Foto = Caminho_Foto;
     }
     
@@ -73,20 +68,12 @@ public class Clientes {
         this.CPF = CPF;
     }
 
-    public String getCNH() {
-        return CNH;
+    public String getRG() {
+        return RG;
     }
 
-    public void setCNH(String CNH) {
-        this.CNH = CNH;
-    }
-
-    public String getValid_CNH() {
-        return Valid_CNH;
-    }
-
-    public void setValid_CNH(String Valid_CNH) {
-        this.Valid_CNH = Valid_CNH;
+    public void setRG(String RG) {
+        this.RG = RG;
     }
 
     public String getData_Nasc() {
@@ -103,6 +90,14 @@ public class Clientes {
 
     public void setTelefone(String Telefone) {
         this.Telefone = Telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEndereco() {
@@ -145,22 +140,6 @@ public class Clientes {
         this.Estado = Estado;
     }
 
-    public String getMoto_Auto() {
-        return Moto_Auto;
-    }
-
-    public void setMoto_Auto(String Moto_Auto) {
-        this.Moto_Auto = Moto_Auto;
-    }
-
-    public String getCNH_Moto_Auto() {
-        return CNH_Moto_Auto;
-    }
-
-    public void setCNH_Moto_Auto(String CNH_Moto_Auto) {
-        this.CNH_Moto_Auto = CNH_Moto_Auto;
-    }
-
     public String getCaminho_Foto() {
         return Caminho_Foto;
     }
@@ -169,14 +148,10 @@ public class Clientes {
         this.Caminho_Foto = Caminho_Foto;
     }
 
-    
-   
     @Override
     public String toString() {
-        return id + ";" + NomeCompleto + ";" + CPF + ";" + CNH + ";" + Valid_CNH 
-            + ";"+ Data_Nasc + ";" + Telefone + ";" + Endereco + ";" + Bairro 
-            + ";" + CEP + ";" + Cidade + ";" + Estado + ";" + Moto_Auto + ";" + CNH_Moto_Auto + ";"
-            + Caminho_Foto + ";";
+        return id + ";" + NomeCompleto + ";" + CPF + ";" + RG + ";"+ Data_Nasc + ";" + Telefone + ";"+ email + ";"+ Endereco + 
+                ";" + Bairro + ";" + CEP + ";" + Cidade + ";" + Estado + ";"+ Caminho_Foto + ";";
     }
     
 }

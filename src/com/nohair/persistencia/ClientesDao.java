@@ -69,13 +69,13 @@ public class ClientesDao implements IClientesDao{
                 
                     objetoClientes.setCPF(vetorString[2]);
                 
-                    objetoClientes.setCNH(vetorString[3]);
+                    objetoClientes.setRG(vetorString[3]);
+                               
+                    objetoClientes.setData_Nasc(vetorString[4]);
                 
-                    objetoClientes.setValid_CNH(vetorString[4]);
-                
-                    objetoClientes.setData_Nasc(vetorString[5]);
-                
-                    objetoClientes.setTelefone(vetorString[6]);
+                    objetoClientes.setTelefone(vetorString[5]);
+                    
+                    objetoClientes.setEmail(vetorString[6]);
                 
                     objetoClientes.setEndereco(vetorString[7]);
                 
@@ -86,12 +86,8 @@ public class ClientesDao implements IClientesDao{
                     objetoClientes.setCidade(vetorString[10]);
                 
                     objetoClientes.setEstado(vetorString[11]);
-                
-                    objetoClientes.setMoto_Auto(vetorString[12]);
-                
-                    objetoClientes.setCNH_Moto_Auto(vetorString[13]);
                     
-                    objetoClientes.setCaminho_Foto(vetorString[14]);
+                    objetoClientes.setCaminho_Foto(vetorString[12]);
                 
                     listaDeClientes.add(objetoClientes);
                 }
