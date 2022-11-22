@@ -1,0 +1,1 @@
+40;Teste;750.802.731-00;6666666;99/99/9999;99 (999) 99999-9999;99;99;99;99.999-999;9;9;/home/Igor/Downloads/GitHub/Aluguel-de-Carros-JAVA-Desktop/src/com/nohair/fotoCliente/Cliente04.png;

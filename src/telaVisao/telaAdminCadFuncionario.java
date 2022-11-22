@@ -179,6 +179,7 @@ public class telaAdminCadFuncionario extends javax.swing.JFrame {
             jTextFieldSenhaFunc.setText("");
             JOptionPane.showMessageDialog(this,"Usuario Cadastrado com sucesso");
             //imprimirDadosNaGrid(adminControle.listagem());
+            
           
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(this, erro.getMessage());
