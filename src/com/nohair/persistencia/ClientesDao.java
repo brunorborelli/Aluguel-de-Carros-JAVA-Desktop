@@ -8,8 +8,10 @@ import com.nohair.modelos.Clientes;
 import com.nohair.util.id.GeradorID;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +24,6 @@ public class ClientesDao implements IClientesDao{
     
     public ClientesDao() {
         nomeDoArquivoNoDisco = "./src/com/nohair/dados/txt/Clientes.txt";
-
     }
     
     @Override
@@ -99,5 +100,15 @@ public class ClientesDao implements IClientesDao{
         }
     }
     
+    public void ChecarTxt(){
+        try{
+            File Clientes = new File("./src/com/nohair/dados/txt/Clientes.txt");
+                if(!Clientes.exists()){
+                    Clientes.createNewFile();
+                }
+            }
+        catch(IOException ex){              
+        }
+    }  
     
 }

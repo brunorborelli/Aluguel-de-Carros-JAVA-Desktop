@@ -7,3 +7,5 @@
 25/10/2022 - Tela Cliente gerando erro "campo vazio" tela cadastro, Unico Gerador de ID
 
 19/11/2022 - Tela Cliente com os requisitos nescessários + Mascara Jtextfield CNPJ/CPF
+
+21/11/2022 - Tela Clientes se excluir o TXT ele cria um novo !

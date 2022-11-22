@@ -1,3 +1,0 @@
-36;Igor Leonor Macedo;750.802.731-00;6124073;21/03/1994;55 (062) 99820-9756;@@@;Alameda;Faiçalville;74.350-770;Goiania;Goias;/home/Igor/Downloads/GitHub/Aluguel-de-Carros-JAVA-Desktop/src/com/nohair/fotoCliente/Cliente05.png;
-37;Hospital do Coraçao Anis Rassi;999.999.999-99;5555555;55/55/5555;55 (555) 55555-5555;@#@;999;999;99.999-999;9999999;99999999999;/home/Igor/Downloads/GitHub/Aluguel-de-Carros-JAVA-Desktop/src/com/nohair/fotoCliente/Cliente03.png;
-38;Hospital;88.888.888/8888-88;       ;  /  /    ;88 (888) 88888-8888;##@@;99;99;99.999-999;999999999;999999999;/home/Igor/Downloads/GitHub/Aluguel-de-Carros-JAVA-Desktop/src/com/nohair/fotoCliente/Cliente01.png;

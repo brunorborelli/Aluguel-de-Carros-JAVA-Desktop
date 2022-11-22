@@ -58,6 +58,8 @@ public class TelaDeClientes extends javax.swing.JFrame {
     public TelaDeClientes(){
         try{
             initComponents();
+            ClientesDao objeto = new ClientesDao();
+            objeto.ChecarTxt();
                        
             // Inicializa Vazio - Para cair no if do Incluir Cliente
             Txt_NomeCompleto.setText("");
@@ -101,7 +103,7 @@ public class TelaDeClientes extends javax.swing.JFrame {
         }
         catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro ao Inicializar","Erro",JOptionPane.ERROR);
-        }      
+        }   
     }
 
     /**
