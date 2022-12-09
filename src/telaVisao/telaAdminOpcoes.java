@@ -27,7 +27,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Bt_Cad_Veiculos = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         Bt_Cad_Cliente = new javax.swing.JButton();
         Bt_Buscar_Cliente = new javax.swing.JButton();
@@ -35,15 +35,16 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela de Consulta");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Bem vindo, colaborador!");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setText("Cadastrar veículos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Bt_Cad_Veiculos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Bt_Cad_Veiculos.setText("Cadastrar veículos");
+        Bt_Cad_Veiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Bt_Cad_VeiculosActionPerformed(evt);
             }
         });
 
@@ -98,7 +99,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(Bt_Cad_Veiculos)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Bt_Cad_Cliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -116,7 +117,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(Bt_Cad_Veiculos)
                     .addComponent(jButton2))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -132,13 +133,14 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Bt_Cad_VeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Cad_VeiculosActionPerformed
         // TODO add your handling code here:
         
-        telaAdminCadVeiculo f = new telaAdminCadVeiculo();
+        //telaAdminCadVeiculo f = new telaAdminCadVeiculo();
+            TelaDeVeiculos f = new TelaDeVeiculos();
             this.dispose();
             f.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Bt_Cad_VeiculosActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -209,7 +211,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bt_Buscar_Cliente;
     private javax.swing.JButton Bt_Cad_Cliente;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Bt_Cad_Veiculos;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

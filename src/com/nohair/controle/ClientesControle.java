@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.nohair.persistencia.IClientesDao;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,6 +42,7 @@ public class ClientesControle implements IClientesControle{
             throw erro;
         }
     }
+    
     @Override
     public void incluir(Clientes objeto) throws Exception {
         
@@ -50,10 +52,18 @@ public class ClientesControle implements IClientesControle{
         }
         ClientesPersistencia.incluir(objeto);
     }
-
+         
     @Override
     public void alterar(Clientes objeto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    public void procurar(Clientes objeto) throws Exception {
+        
+        if(buscarClientes(objeto.getNomeCompleto())){
+            throw new Exception("Cliente encontrado !");
+        }
     }
 
     @Override

@@ -14,5 +14,6 @@ import java.util.ArrayList;
 public interface IClientesControle {
     void incluir(Clientes objeto)throws Exception;
     void alterar(Clientes objeto)throws Exception;
+    void procurar(Clientes objeto)throws Exception;
     ArrayList<Clientes> listagem()throws Exception;
 }
