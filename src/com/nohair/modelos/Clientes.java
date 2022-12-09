@@ -10,6 +10,7 @@ package com.nohair.modelos;
  */
 public class Clientes {
     // 14 Variaveis de Atributos
+    
     private int id = 0;
     private String NomeCompleto = "";
     private String CPF = "";

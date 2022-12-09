@@ -9,17 +9,21 @@ import com.nohair.util.id.GeradorID;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author ejmcc
- */
+import javax.swing.AbstractAction;
+import telaVisao.TelaDeClientes;
+
+
 public class ClientesDao implements IClientesDao{
-    
+      
     private String nomeDoArquivoNoDisco;
     
     public ClientesDao() {
@@ -28,6 +32,7 @@ public class ClientesDao implements IClientesDao{
     
     @Override
     public void incluir(Clientes objeto) throws Exception {
+        
         try{
             //cria o arquivo
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco,true);
@@ -47,8 +52,24 @@ public class ClientesDao implements IClientesDao{
 
     @Override
     public void alterar(Clientes objeto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            
+        }
+        catch(Exception erro){
+            
+        }    
     }
+
+    @Override
+    public void procurar(Clientes objeto) throws Exception {
+        try{
+            
+        }
+        catch(Exception erro){
+            
+        }
+    }    
+   
 
     @Override
     public ArrayList<Clientes> listagem() throws Exception {
