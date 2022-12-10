@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 
 import javax.swing.AbstractAction;
 import telaVisao.TelaDeClientes;
+import java.util.Iterator;
 
 
 public class ClientesDao implements IClientesDao{
@@ -52,12 +53,24 @@ public class ClientesDao implements IClientesDao{
 
     @Override
     public void alterar(Clientes objeto) throws Exception {
-        try{
-            
-        }
-        catch(Exception erro){
-            
-        }    
+        try {
+            Iterator<Clientes> lista = listagem().iterator();
+            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
+            //Criar o buffer do arquivo
+           BufferedWriter bw =new BufferedWriter(fw);
+            while(lista.hasNext()){
+                Clientes aux = lista.next();
+                if(aux.getId()== objeto.getId()){
+                     bw.write(objeto.toString()+"\n");
+                }
+                else{
+                    bw.write(aux.toString()+"\n");
+                }
+               }// GRAVAR NO ARQUIVO OBJETO
+            bw.close();
+         } catch(Exception erro){
+         throw erro;
+        }   
     }
 
     @Override

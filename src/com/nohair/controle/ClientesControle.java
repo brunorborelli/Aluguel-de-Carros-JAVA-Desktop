@@ -55,7 +55,10 @@ public class ClientesControle implements IClientesControle{
          
     @Override
     public void alterar(Clientes objeto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        /*if(buscarClientes(objeto.getNomeCompleto())){
+            throw new Exception("Marca já foi cadastrada");
+        }*/
+        ClientesPersistencia.alterar(objeto);
     }
     
     @Override

@@ -911,24 +911,27 @@ public class TelaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_Bt_P_FisicaMouseClicked
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        try{
-            Clientes objeto = new Clientes(0,Txt_NomeCompleto.getText(),Txt_CPF.getText(),Txt_RG.getText(),
-                Txt_Data_Nasc.getText(), Txt_Telef.getText(),Txt_Email.getText(),Txt_Endereco.getText(),Txt_Bairro.getText(),
-                Txt_CEP.getText(),Txt_Cidade.getText(),Txt_Estado.getText(), Txt_Caminho_Foto.getText());
+	try {          
+            Clientes objeto = new Clientes(Integer.parseInt(Txt_ID.getText()),Txt_NomeCompleto.getText().toUpperCase(),Txt_CPF.getText(),Txt_RG.getText(),
+               Txt_Data_Nasc.getText(), Txt_Telef.getText(),Txt_Email.getText(),Txt_Endereco.getText(),Txt_Bairro.getText(),
+               Txt_CEP.getText(),Txt_Cidade.getText(),Txt_Estado.getText(), Txt_Caminho_Foto.getText());
             
-                ClientesControle.alterar(objeto);
+            ClientesControle.alterar(objeto);
             
-                // Atualiza a Grid quando Incluir
-                this.imprimirDadosNaGrid(ClientesControle.listagem());          
-        }
-        catch(Exception erro){
-            JOptionPane.showMessageDialog(null, "Cadastro nao alterado","Erro",JOptionPane.ERROR);
+            imprimirDadosNaGrid(ClientesControle.listagem());          
+        } 
+        catch (Exception erro) {
+            JOptionPane.showMessageDialog(this, erro.getMessage());          
         }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         try{
-
+            for(int i = 0; i < jTableClientes.getRowCount(); i++){
+                if(jTableClientes.getValueAt(i, 1).toString().toLowerCase().contains(Txt_NomeCompleto.getText().toLowerCase())){
+                    jTableClientes.changeSelection(i, 0, false, false);
+                }
+            }
         
         }
         catch(Exception erro){
