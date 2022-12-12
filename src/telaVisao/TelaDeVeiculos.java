@@ -11,16 +11,17 @@ import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 
-import com.nohair.controle.ClientesControle;
+import com.nohair.controle.VeiculosControle;
 import com.nohair.util.id.GeradorID;
 import javax.swing.JOptionPane;
-import com.nohair.modelos.Clientes;
-import com.nohair.persistencia.ClientesDao;
+import com.nohair.modelos.Veiculos;
+import com.nohair.persistencia.VeiculosDao;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
-import com.nohair.persistencia.IClientesDao;
-import com.nohair.controle.IClientesControle;
+import com.nohair.persistencia.IVeiculosDao;
+import com.nohair.controle.IVeiculosControle;
+import com.nohair.modelos.Clientes;
 import java.io.File;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -39,79 +40,90 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
+import javax.swing.JToggleButton;
+import javax.swing.JComponent;
 
 
 
 public class TelaDeVeiculos extends javax.swing.JFrame {
-                
-    //Atributos 
-    IClientesControle ClientesControle = new ClientesControle();
     
-    //Mascaras CNPJ / CPF / ...
-    private MaskFormatter CNPJMask;
-    private MaskFormatter CPFMask;
-    private MaskFormatter RGMask;
-    private MaskFormatter NascMask;
-    private MaskFormatter TelMask;
-    private MaskFormatter CEPMask;
+    // Combo Box - Combustivel 
+    String selectedValue = "";
+    
+    //Atributos 
+    IVeiculosControle VeiculosControle = new VeiculosControle();
+    
+    //Mascaras dos TextField ...
+    private MaskFormatter PlacaMask;
+    private MaskFormatter RNVMask;
+    private MaskFormatter ANOMASK;
+    private MaskFormatter VALORMASK;
+    private MaskFormatter PlacaMSMask;
+
 
     public TelaDeVeiculos(){
         try{
             initComponents();
             
-            // Inicializa a Mascara CNPJ / CPF / ...
-            CNPJMask = new MaskFormatter("##.###.###/####-##");
-            CPFMask = new MaskFormatter("###.###.###-##");
-            RGMask = new MaskFormatter("#######");
-            NascMask = new MaskFormatter("## / ## / ####");
-            TelMask = new MaskFormatter("+## (###) # #### - ####");
-            CEPMask = new MaskFormatter("## . ### - ###");
-                    
+            //Combobox inicializa Vazia
+            CB_Combustivel.setSelectedIndex(-1);
+            CB_Marca.setSelectedIndex(-1);
+            CB_Modelo.setSelectedIndex(-1);
+            CB_Tipo.setSelectedIndex(-1);
+
+            // Inicializa a Mascara dos TextField ...
+            PlacaMask = new MaskFormatter("UUU-####");
+            PlacaMSMask = new MaskFormatter("UUU-#A##");
+            RNVMask = new MaskFormatter("###########");
+            ANOMASK = new MaskFormatter("####");
+            //VALORMASK = new MaskFormatter("R$");   
+            
+            //Txt_Placa.setValue(null);
+            //Txt_Placa.setFormatterFactory(new DefaultFormatterFactory(PlacaMask));
+            Txt_Renavam.setValue(null);
+            Txt_Renavam.setFormatterFactory(new DefaultFormatterFactory(RNVMask));
+            Txt_Ano_Fab.setValue(null);
+            Txt_Ano_Fab.setFormatterFactory(new DefaultFormatterFactory(ANOMASK));
+            Txt_Ano_Modelo.setValue(null);
+            Txt_Ano_Modelo.setFormatterFactory(new DefaultFormatterFactory(ANOMASK));
+            //Txt_Pr_Compra.setValue(null);
+            //Txt_Pr_Compra.setFormatterFactory(new DefaultFormatterFactory(VALORMASK));
+            //Txt_Pr_Venda.setValue(null);
+            //Txt_Pr_Venda.setFormatterFactory(new DefaultFormatterFactory(VALORMASK));
                    
             // Inicializa Vazio e o cursor na posiçao 0
-            Txt_CPF.setText("");
-            Txt_CPF.setCaretPosition( 0 );
-            Txt_RG.setText("");
-            Txt_RG.setCaretPosition( 0 );
-            Txt_Data_Nasc.setText(""); 
-            Txt_Data_Nasc.setCaretPosition( 0 );
-            Txt_Telef.setText("");
-            Txt_Telef.setCaretPosition( 0 );
-            Txt_Email.setText("");
-            Txt_Email.setCaretPosition( 0 );
-            Txt_Endereco.setText("");
-            Txt_Endereco.setCaretPosition( 0 );
-            Txt_Bairro.setText("");
-            Txt_Bairro.setCaretPosition( 0 );
-            Txt_CEP.setText("");
-            Txt_CEP.setCaretPosition( 0 );
-            Txt_Cidade.setText("");
-            Txt_Cidade.setCaretPosition( 0 );
+            Txt_Placa.setCaretPosition( 0 );
+            Txt_Renavam.setCaretPosition( 0 ); 
+            Txt_Pr_Compra.setCaretPosition( 2 );
+            Txt_Pr_Venda.setCaretPosition( 2 );
+            Txt_Ano_Fab.setCaretPosition( 0 );
+            Txt_Ano_Modelo.setCaretPosition( 0 );
+            Txt_km.setText("");
+            Txt_km.setCaretPosition( 0 );
 
         
             // Campos Iniciam desativados
-
-            Txt_CPF.setEnabled(false);
-            Txt_RG.setEnabled(false);
-            Txt_Data_Nasc.setEnabled(false);
-            Txt_Telef.setEnabled(false);
-            Txt_Email.setEnabled(false);
-            Txt_Endereco.setEnabled(false);
-            Txt_Bairro.setEnabled(false);
-            Txt_CEP.setEnabled(false);
-            Txt_Cidade.setEnabled(false);
+            /*Txt_Placa.setEnabled(false);
+            Txt_Renavam.setEnabled(false);
+            Txt_Pr_Compra.setEnabled(false);
+            Txt_Pr_Venda.setEnabled(false);
+            Txt_Ano_Fab.setEnabled(false);
+            Txt_Ano_Modelo.setEnabled(false);
+            Txt_Combustivel.setEnabled(false);
+            Txt_km.setEnabled(false);*/
 
         
-            DefaultTableModel modelo = (DefaultTableModel) jTableClientes.getModel();
-            jTableClientes.setRowSorter(new TableRowSorter(modelo));
+            DefaultTableModel modelo = (DefaultTableModel) jTableVeiculos.getModel();
+            jTableVeiculos.setRowSorter(new TableRowSorter(modelo));
         
             this.setLocationRelativeTo(null);
             
                 try {
-                    imprimirDadosNaGrid(ClientesControle.listagem());
+                    imprimirDadosNaGrid(VeiculosControle.listagem());
                 } 
                 catch (Exception erro) {
-                    JOptionPane.showMessageDialog(this, "Erro ao Puxar a Lista de Clientes");
+                    JOptionPane.showMessageDialog(this, "Erro ao Puxar a Lista de Veiculos");
                 }  
         }
         catch (Exception erro) {
@@ -129,11 +141,9 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        buttonGroup5 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -143,28 +153,34 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         Bt_Add_Foto = new javax.swing.JButton();
         jButtonNovoCadastro = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableClientes = new javax.swing.JTable();
+        jTableVeiculos = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         CPF_CNPJ = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        Txt_Endereco = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        Txt_Bairro = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        Txt_Cidade = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        Txt_CPF = new javax.swing.JFormattedTextField();
-        Txt_Telef = new javax.swing.JFormattedTextField();
-        Txt_Data_Nasc = new javax.swing.JFormattedTextField();
-        Txt_CEP = new javax.swing.JFormattedTextField();
-        Txt_Email = new javax.swing.JTextField();
-        Txt_RG = new javax.swing.JFormattedTextField();
+        Txt_Placa = new javax.swing.JFormattedTextField();
+        Txt_Renavam = new javax.swing.JFormattedTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        CB_Marca = new javax.swing.JComboBox<>();
+        CB_Tipo = new javax.swing.JComboBox<>();
+        CB_Modelo = new javax.swing.JComboBox<>();
+        Txt_Ano_Fab = new javax.swing.JFormattedTextField();
+        Txt_Ano_Modelo = new javax.swing.JFormattedTextField();
+        CB_Combustivel = new javax.swing.JComboBox<>();
+        Txt_km = new javax.swing.JFormattedTextField();
+        Txt_Pr_Venda = new javax.swing.JFormattedTextField();
+        Txt_Pr_Compra = new javax.swing.JFormattedTextField();
+        Bt_Mercosul = new javax.swing.JRadioButton();
+        Bt_PAntiga = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Area_Logo = new javax.swing.JLabel();
 
@@ -188,9 +204,9 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(254, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,20 +284,20 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
+        jTableVeiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID"
+                "ID", "MARCA", "MODELO", "TIPO", "PLACA", "RENAVAM", "PREÇO DE VENDA", "PREÇO DE COMPRA", "ANO DE FABRICAÇAO", "ANO DO MODELO", "COMBUSTIVEL", "QUILOMETRAGEM"
             }
         ));
-        jTableClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableClientesMouseClicked(evt);
+                jTableVeiculosMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTableClientes);
+        jScrollPane2.setViewportView(jTableVeiculos);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados de Cadastro"));
 
@@ -291,22 +307,14 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Renavam:");
 
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel8.setText("Preço de compra:");
-
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setText("Preco de venda:");
 
         jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel12.setText("Ano do Modelo:");
 
-        Txt_Endereco.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setText("Combustivel:");
-
-        Txt_Bairro.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Txt_Bairro.setPreferredSize(new java.awt.Dimension(64, 29));
 
         jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel14.setText("Quilometragem:");
@@ -314,47 +322,18 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setText("Tipo:");
 
-        Txt_Cidade.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Txt_Cidade.setMinimumSize(new java.awt.Dimension(64, 29));
-        Txt_Cidade.setPreferredSize(new java.awt.Dimension(64, 29));
-
         jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel18.setText("Ano de fabricação:");
 
-        Txt_CPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        Txt_CPF.setMinimumSize(new java.awt.Dimension(64, 29));
+        Txt_Placa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        Txt_Placa.setMinimumSize(new java.awt.Dimension(64, 29));
 
         try {
-            Txt_Telef.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
+            Txt_Renavam.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        Txt_Telef.setMinimumSize(new java.awt.Dimension(64, 29));
-        Txt_Telef.setPreferredSize(new java.awt.Dimension(96, 29));
-
-        try {
-            Txt_Data_Nasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        Txt_Data_Nasc.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        Txt_Data_Nasc.setMinimumSize(new java.awt.Dimension(64, 29));
-
-        try {
-            Txt_CEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        Txt_CEP.setPreferredSize(new java.awt.Dimension(64, 29));
-
-        Txt_Email.setPreferredSize(new java.awt.Dimension(64, 29));
-
-        try {
-            Txt_RG.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        Txt_RG.setMinimumSize(new java.awt.Dimension(64, 29));
+        Txt_Renavam.setMinimumSize(new java.awt.Dimension(64, 29));
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel17.setText("Marca:");
@@ -362,114 +341,201 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("Modelo:");
 
+        CB_Marca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_Marca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CB_MarcaActionPerformed(evt);
+            }
+        });
+
+        CB_Tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_Tipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CB_TipoActionPerformed(evt);
+            }
+        });
+
+        CB_Modelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_Modelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CB_ModeloActionPerformed(evt);
+            }
+        });
+
+        CB_Combustivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gasolina", "Etanol", "GNV", "Diesel", "Eletrico" }));
+        CB_Combustivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CB_CombustivelActionPerformed(evt);
+            }
+        });
+
+        Txt_Pr_Venda.setText("R$");
+
+        Txt_Pr_Compra.setText("R$");
+
+        buttonGroup1.add(Bt_Mercosul);
+        Bt_Mercosul.setText("Placa Mercosul");
+        Bt_Mercosul.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Bt_MercosulMouseClicked(evt);
+            }
+        });
+
+        buttonGroup1.add(Bt_PAntiga);
+        Bt_PAntiga.setText("Placa Antiga");
+        Bt_PAntiga.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Bt_PAntigaMouseClicked(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nohair/dados/img/Icones/PLacaNormal.png"))); // NOI18N
+        jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nohair/dados/img/Icones/PLacaMercoSul.png"))); // NOI18N
+        jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel10.setText("Preco de Compra:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CPF_CNPJ, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                    .addComponent(jLabel2)
+                                    .addComponent(Bt_PAntiga))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(0, 20, Short.MAX_VALUE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(Bt_Mercosul)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(CPF_CNPJ)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Txt_Placa, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CB_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                    .addGap(19, 19, 19)
+                                    .addComponent(jLabel14))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addComponent(jLabel12))
+                                .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Txt_CPF, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(Txt_RG, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(Txt_Data_Nasc, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(Txt_Telef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
+                            .addComponent(Txt_Pr_Compra)
+                            .addComponent(Txt_Pr_Venda)
+                            .addComponent(Txt_Ano_Fab)
+                            .addComponent(Txt_Ano_Modelo)
+                            .addComponent(CB_Combustivel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Txt_km, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addGap(58, 58, 58)
-                                .addComponent(jLabel19))
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CB_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
+                                .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Txt_Endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(18, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(CB_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Txt_Bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Txt_CEP, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                    .addComponent(Txt_Cidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(17, 17, 17))))))
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Txt_Renavam, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel19))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(Txt_Endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Txt_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CPF_CNPJ))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13)
-                        .addComponent(Txt_Bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Txt_RG, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(Txt_CEP, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Txt_Data_Nasc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Txt_Cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15)))
+                            .addComponent(jLabel17)
+                            .addComponent(CB_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Txt_Telef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9))))
+                            .addComponent(Txt_Renavam, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
-                .addGap(14, 14, 14))
+                    .addComponent(CB_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Txt_Pr_Compra, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(CB_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Bt_Mercosul)
+                            .addComponent(Bt_PAntiga))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Txt_Pr_Venda, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(Txt_Ano_Fab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(Txt_Ano_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CB_Combustivel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(Txt_km, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Txt_Placa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CPF_CNPJ))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Txt_CPF, Txt_Data_Nasc});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Txt_Ano_Fab, Txt_Ano_Modelo, Txt_Placa, Txt_Renavam});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Txt_Bairro, Txt_CEP, Txt_Cidade, Txt_Endereco});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {CB_Marca, CB_Modelo, CB_Tipo});
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Foto Cadastrada"));
 
@@ -500,30 +566,27 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2)
                 .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -533,35 +596,33 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void imprimirDadosNaGrid(ArrayList<Clientes> listaDeClientes){
+    private void imprimirDadosNaGrid(ArrayList<Veiculos> listaDeVeiculos){
         try {
-            DefaultTableModel model =  (DefaultTableModel) jTableClientes.getModel();
+            DefaultTableModel model =  (DefaultTableModel) jTableVeiculos.getModel();
             //Limpa a tabela 
             model.setNumRows(0);
             
-            Iterator<Clientes> lista = listaDeClientes.iterator();
+            Iterator<Veiculos> lista = listaDeVeiculos.iterator();
             
             while(lista.hasNext()){
                 
-                String[] saida= new String[13];
+                String[] saida= new String[12];
                 
-                Clientes aux = lista.next();
+                Veiculos aux = lista.next();
                 saida[0]= aux.getId()+"";
-                saida[1]= aux.getNomeCompleto();
-                saida[2] = aux.getCPF();
-                saida[3] = aux.getRG();//
-                saida[4] = aux.getData_Nasc();//
-                saida[5] = aux.getTelefone();//
-                saida[6] = aux.getEmail();
-                saida[7] = aux.getEndereco();//
-                saida[8] = aux.getBairro();//
-                saida[9] = aux.getCEP();//
-                saida[10] = aux.getCidade();//
-                saida[11] = aux.getEstado();//
-                saida[12] = aux.getCaminho_Foto();
+                saida[1]= aux.getMarca();
+                saida[2]= aux.getModelo();
+                saida[3]= aux.getTipo();
+                saida[4]= aux.getPlaca();          
+                saida[5] = aux.getRenavam();
+                saida[6] = aux.getPr_Compra();//
+                saida[7] = aux.getPr_Venda();//
+                saida[8] = aux.getAno_Fab();//
+                saida[9] = aux.getAno_Modelo();
+                saida[10] = aux.getCombustivel();//
+                saida[11] = aux.getQuilometragem();//
                 
-                model.addRow(saida);
-                
+                model.addRow(saida);               
             } 
         } 
         catch(Exception erro){
@@ -570,39 +631,72 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
     }
     
     private void AtivarCampos(){
-
-                    Txt_CPF.setEnabled(true);
-                    Txt_RG.setEnabled(true);
-                    Txt_Telef.setEnabled(true);
-                    Txt_Email.setEnabled(true);
-                    Txt_Endereco.setEnabled(true);
-                    Txt_Bairro.setEnabled(true);
-                    Txt_CEP.setEnabled(true);
-                    Txt_Cidade.setEnabled(true);
-       
+                    Txt_Placa.setEnabled(true);
+                    Txt_Renavam.setEnabled(true);
+                    Txt_Pr_Venda.setEnabled(true);
+                    Txt_Ano_Fab.setEnabled(true);
+                    Txt_Ano_Modelo.setEnabled(true);
+                    Txt_km.setEnabled(true);  
     }
     
     private void DesativaCampos(){
-
-                    Txt_CPF.setEnabled(false);
-                    Txt_RG.setEnabled(false);
-                    Txt_Telef.setEnabled(false);
-                    Txt_Email.setEnabled(false);
-                    Txt_Endereco.setEnabled(false);
-                    Txt_Bairro.setEnabled(false);
-                    Txt_CEP.setEnabled(false);
-                    Txt_Cidade.setEnabled(false);
-     
+                    Txt_Placa.setEnabled(false);
+                    Txt_Renavam.setEnabled(false);
+                    Txt_Pr_Venda.setEnabled(false);
+                    Txt_Ano_Fab.setEnabled(false);
+                    Txt_Ano_Modelo.setEnabled(false);
+                    Txt_km.setEnabled(false);    
     }
-    
-    
-    
-    
+       
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
                   
         try {   
- 
-                 
+            if(!Txt_Placa.getText().equals("") && !Txt_Renavam.getText().equals("") && !Txt_Pr_Venda.getText().equals("")
+               && !Txt_Ano_Fab.getText().equals("") && !Txt_Ano_Modelo.getText().equals("")&& !Txt_km.getText().equals("")){
+                
+                    //Construtor Cliente
+                    Veiculos objeto = new Veiculos(0,Txt_Placa.getText(),Txt_Renavam.getText(),Txt_Pr_Compra.getText(),
+                    Txt_Pr_Venda.getText(),Txt_Ano_Fab.getText(),Txt_Ano_Modelo.getText(),String.valueOf(CB_Combustivel.getSelectedItem()),Txt_km.getText());
+            
+                    VeiculosControle.incluir(objeto);
+            
+                    // Atualiza a Grid quando Incluir
+                    this.imprimirDadosNaGrid(VeiculosControle.listagem());
+                    
+                    // Zera os Campos com Mascaras 
+                    Txt_Placa.setValue(null);
+                    //Txt_Placa.setFormatterFactory(new DefaultFormatterFactory(PlacaMask));
+                    Txt_Renavam.setValue(null);
+                    Txt_Renavam.setFormatterFactory(new DefaultFormatterFactory(RNVMask));
+                    Txt_Ano_Fab.setValue(null);
+                    Txt_Ano_Fab.setFormatterFactory(new DefaultFormatterFactory(ANOMASK));
+                    Txt_Ano_Modelo.setValue(null);
+                    Txt_Ano_Modelo.setFormatterFactory(new DefaultFormatterFactory(ANOMASK));
+                    //Txt_Pr_Compra.setValue(null);
+                    //Txt_Pr_Compra.setFormatterFactory(new DefaultFormatterFactory(VALORMASK));
+                    //Txt_Pr_Venda.setValue(null);
+                    //Txt_Pr_Venda.setFormatterFactory(new DefaultFormatterFactory(VALORMASK));
+                    
+                    Txt_km.setText("");
+                    Txt_Pr_Compra.setText("R$");
+                    Txt_Pr_Venda.setText("R$");
+                    
+                    //Restaura a Combobox Vazia
+                    CB_Combustivel.setSelectedIndex(-1);
+                    CB_Marca.setSelectedIndex(-1);
+                    CB_Modelo.setSelectedIndex(-1);
+                    CB_Tipo.setSelectedIndex(-1);
+                    
+                    //JradioButton
+                    buttonGroup1.clearSelection();
+                    Bt_Mercosul.setSelected(false);
+                    Bt_PAntiga.setSelected(false);
+       
+            }
+            else{
+                // Se houver campo vazio no cadastro e mostrado uma mensagem !
+                JOptionPane.showMessageDialog(this, "Campo Vazio");    
+            }                  
         } 
         catch (Exception erro) {
             JOptionPane.showMessageDialog(this, erro.getMessage());
@@ -620,7 +714,7 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
             fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
             
             // Abre no diretorio especifico
-            fc.setCurrentDirectory(new File ("./src/com/nohair/fotoCliente"));
+            fc.setCurrentDirectory(new File ("./src/com/nohair/fotoVeiculos"));
             
             fc.showOpenDialog(this);
             
@@ -639,29 +733,54 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Bt_Add_FotoActionPerformed
 
-    private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClientesMouseClicked
+    private void jTableVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVeiculosMouseClicked
       
       try{
-       
+        // Ao selecionar a linha da tabela, apresenta os valores no TextField
+        
+        if(jTableVeiculos.getSelectedRow() != -1){
+                         
+                /*Txt_ID.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),0).toString());           
+                CB_Marca.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),1).toString());
+                CB_Modelo.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),2).toString());                
+                CB_Tipo.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),3).toString());*/
+                Txt_Placa.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),4).toString());
+                Txt_Renavam.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),5).toString());
+                Txt_Pr_Compra.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),6).toString());
+                Txt_Pr_Venda.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),7).toString());
+                Txt_Ano_Fab.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),8).toString());
+                Txt_Ano_Modelo.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),9).toString());
+                //CB_Combustivel.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),10).toString());
+                Txt_km.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),11).toString());              
+            }       
       }
       catch (Exception ERRO){
         JOptionPane.showMessageDialog(null, "Erro ao Selecionar a Tabela","Erro",JOptionPane.ERROR);
       }    
       
-    }//GEN-LAST:event_jTableClientesMouseClicked
+    }//GEN-LAST:event_jTableVeiculosMouseClicked
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        try{
-          
-        }
-        catch(Exception erro){
-            JOptionPane.showMessageDialog(null, "Cadastro nao alterado","Erro",JOptionPane.ERROR);
+	try {          
+            Veiculos objeto = new Veiculos(0,Txt_Placa.getText(),Txt_Renavam.getText(),Txt_Pr_Compra.getText(),
+                    Txt_Pr_Venda.getText(),Txt_Ano_Fab.getText(), Txt_Ano_Modelo.getText(),CB_Combustivel.getSelectedItem().toString(),Txt_km.getText());
+            
+            VeiculosControle.alterar(objeto);
+            
+            imprimirDadosNaGrid(VeiculosControle.listagem());          
+        } 
+        catch (Exception erro) {
+            JOptionPane.showMessageDialog(this, erro.getMessage());          
         }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         try{
-
+            for(int i = 0; i < jTableVeiculos.getRowCount(); i++){
+                if(jTableVeiculos.getValueAt(i, 1).toString().toLowerCase().contains(Txt_Placa.getText().toLowerCase())){
+                    jTableVeiculos.changeSelection(i, 0, false, false);
+                }
+            }
         
         }
         catch(Exception erro){
@@ -677,6 +796,48 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro Novo Cadastro","Erro",JOptionPane.ERROR);
         }
     }//GEN-LAST:event_jButtonNovoCadastroActionPerformed
+
+    private void CB_MarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_MarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CB_MarcaActionPerformed
+
+    private void CB_ModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_ModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CB_ModeloActionPerformed
+
+    private void CB_TipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_TipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CB_TipoActionPerformed
+
+    private void CB_CombustivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_CombustivelActionPerformed
+
+    }//GEN-LAST:event_CB_CombustivelActionPerformed
+
+    private void Bt_MercosulMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Bt_MercosulMouseClicked
+        try{
+            if(Bt_Mercosul.isSelected()){
+                Txt_Placa.setValue(null);
+                Txt_Placa.setFormatterFactory(new DefaultFormatterFactory(PlacaMSMask)); 
+                JOptionPane.showMessageDialog(null, "Placa Mercosul, Selecionada");
+            }
+        }
+        catch(Exception erro){
+            
+        }
+    }//GEN-LAST:event_Bt_MercosulMouseClicked
+
+    private void Bt_PAntigaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Bt_PAntigaMouseClicked
+        try{
+            if(Bt_PAntiga.isSelected()){
+                Txt_Placa.setValue(null);
+                Txt_Placa.setFormatterFactory(new DefaultFormatterFactory(PlacaMask)); 
+                JOptionPane.showMessageDialog(null, "Placa Antiga, Selecionada");
+            }
+        }
+        catch(Exception erro){
+            
+        }
+    }//GEN-LAST:event_Bt_PAntigaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -720,25 +881,28 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Area_Logo;
     private javax.swing.JButton Bt_Add_Foto;
+    private javax.swing.JRadioButton Bt_Mercosul;
+    private javax.swing.JRadioButton Bt_PAntiga;
+    private javax.swing.JComboBox<String> CB_Combustivel;
+    private javax.swing.JComboBox<String> CB_Marca;
+    private javax.swing.JComboBox<String> CB_Modelo;
+    private javax.swing.JComboBox<String> CB_Tipo;
     private javax.swing.JLabel CPF_CNPJ;
-    private javax.swing.JTextField Txt_Bairro;
-    private javax.swing.JFormattedTextField Txt_CEP;
-    private javax.swing.JFormattedTextField Txt_CPF;
-    private javax.swing.JTextField Txt_Cidade;
-    private javax.swing.JFormattedTextField Txt_Data_Nasc;
-    private javax.swing.JTextField Txt_Email;
-    private javax.swing.JTextField Txt_Endereco;
-    private javax.swing.JFormattedTextField Txt_RG;
-    private javax.swing.JFormattedTextField Txt_Telef;
+    private javax.swing.JFormattedTextField Txt_Ano_Fab;
+    private javax.swing.JFormattedTextField Txt_Ano_Modelo;
+    private javax.swing.JFormattedTextField Txt_Placa;
+    private javax.swing.JFormattedTextField Txt_Pr_Compra;
+    private javax.swing.JFormattedTextField Txt_Pr_Venda;
+    private javax.swing.JFormattedTextField Txt_Renavam;
+    private javax.swing.JFormattedTextField Txt_km;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonIncluir;
     private javax.swing.JButton jButtonNovoCadastro;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -746,8 +910,9 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -756,6 +921,6 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableClientes;
+    private javax.swing.JTable jTableVeiculos;
     // End of variables declaration//GEN-END:variables
 }

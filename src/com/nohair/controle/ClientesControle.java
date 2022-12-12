@@ -55,9 +55,6 @@ public class ClientesControle implements IClientesControle{
          
     @Override
     public void alterar(Clientes objeto) throws Exception {
-        /*if(buscarClientes(objeto.getNomeCompleto())){
-            throw new Exception("Marca já foi cadastrada");
-        }*/
         ClientesPersistencia.alterar(objeto);
     }
     

@@ -727,18 +727,18 @@ public class TelaDeClientes extends javax.swing.JFrame {
             
                     Txt_NomeCompleto.setText("");
                     Txt_ID.setText("");
-                    //Txt_CPF.setText("");
-                    //Txt_RG.setText("");
-                    //Txt_Data_Nasc.setText("");
-                    //Txt_Telef.setText("");
                     Txt_Email.setText("");
                     Txt_Endereco.setText("");
                     Txt_Bairro.setText("");
-                    //Txt_CEP.setText("");
                     Txt_Cidade.setText("");
                     Txt_Estado.setText("");
                     Txt_Caminho_Foto.setText("");
                     //Area_Logo.setIcon(null);  
+                    
+                    //Zera o JradioButton
+                    buttonGroup1.clearSelection();
+                    Bt_P_Fisica.setSelected(false);
+                    Bt_P_Juridica.setSelected(false);
             }                
             else{
                 // Se houver campo vazio no cadastro e mostrado uma mensagem !
