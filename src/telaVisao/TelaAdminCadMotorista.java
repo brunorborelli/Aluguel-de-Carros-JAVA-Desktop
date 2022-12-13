@@ -163,6 +163,9 @@ public class TelaAdminCadMotorista extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
            
+            if(!jTextField1NomeMotorista.getText().equals("") && !jTextField1TelefoneMotorista.getText().equals("") && !jTextField1EnderecoMotorista.getText().equals("") && !jTextField1NumeroCNH.getText().equals("") && !jTextField1VencimentoCNH.getText().equals("")){
+            
+        
             Motorista objeto = new Motorista(0,jTextField1NomeMotorista.getText(),jTextField1TelefoneMotorista.getText(),jTextField1EnderecoMotorista.getText(),jTextField1NumeroCNH.getText(),jTextField1VencimentoCNH.getText());
             MotoristaControle.incluir(objeto);
             jTextField1NomeMotorista.setText("");
@@ -171,11 +174,17 @@ public class TelaAdminCadMotorista extends javax.swing.JFrame {
             jTextField1NumeroCNH.setText("");
             jTextField1VencimentoCNH.setText("");
             JOptionPane.showMessageDialog(this,"Motorista Cadastrado com sucesso");
-            //imprimirDadosNaGrid(adminControle.listagem());
+            //imprimirDadosNaGrid(MotoristaControle.listagem());
+            
+            }                
+            else{
+                //Se houver campo vazio no cadastro e mostrado uma mensagem !
+                JOptionPane.showMessageDialog(this, "Erro ao Cadastrar, confira se todos os dados foram inseridos corretamente ou contate o suporte pelo contato 62982971994");
+            }    
             
           
         } catch (Exception erro) {
-            JOptionPane.showMessageDialog(this,"Erro ao Cadastrar, confira se todos os dados foram inseridos corretamente ou consulte o suporte pelo contato 62982971994");
+            JOptionPane.showMessageDialog(this,"Erro ao Cadastrar, contate o suporte pelo contato 62982971994");
            
         }
         
