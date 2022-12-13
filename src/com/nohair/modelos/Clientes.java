@@ -46,10 +46,10 @@ public class Clientes {
         this.Caminho_Foto = Caminho_Foto;
     }
     
-    public int getId() {
+    public static int getId() {
         return id;
     }
-    public void setId(int id) {
+    public static void setId(int id) {
         this.id = id;
     }
 
