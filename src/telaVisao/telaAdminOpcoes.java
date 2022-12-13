@@ -4,6 +4,8 @@
  */
 package telaVisao;
 
+import java.text.ParseException;
+
 /**
  *
  * @author bruno
@@ -202,8 +204,13 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        TelaAdminCadMotorista b = new TelaAdminCadMotorista();
-            this.dispose();
+        TelaAdminCadMotorista b = null;
+        try {
+            b = new TelaAdminCadMotorista();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        this.dispose();
             b.setVisible(true);
         
     }//GEN-LAST:event_jButton8ActionPerformed

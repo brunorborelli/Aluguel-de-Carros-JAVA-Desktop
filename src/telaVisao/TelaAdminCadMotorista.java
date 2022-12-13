@@ -194,14 +194,14 @@ public class TelaAdminCadMotorista extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Motorista Cadastrado com sucesso");
             //imprimirDadosNaGrid(MotoristaControle.listagem());
             
-            /*
+              /*
                     jTextField1TelefoneMotorista.setFormatterFactory(new DefaultFormatterFactory(telefoneMask));
                     jTextField1TelefoneMotorista.setValue(null);
                     jTextField1NumeroCNH.setFormatterFactory(new DefaultFormatterFactory(numeroCNHMask));
                     jTextField1NumeroCNH.setValue(null);
                     jTextField1VencimentoCNH.setFormatterFactory(new DefaultFormatterFactory(vencimentoMask));
                     jTextField1VencimentoCNH.setValue(null);
-                  */  
+                  */
             
             }                
             else{
