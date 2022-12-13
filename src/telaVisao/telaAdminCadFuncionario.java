@@ -8,6 +8,7 @@ import com.nohair.controle.AdminControle;
 import com.nohair.controle.IAdminControle;
 import com.nohair.modelos.admin;
 import com.nohair.modelos.admin;
+import com.nohair.persistencia.AdminDao;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -31,6 +32,8 @@ public class telaAdminCadFuncionario extends javax.swing.JFrame {
      */
     public telaAdminCadFuncionario() {
         initComponents();
+        AdminDao objeto = new AdminDao();
+        objeto.ChecarTxt();
         this.setLocationRelativeTo(null);
          try {
              ArrayList<admin> lista = adminControle.listagem();
