@@ -26,11 +26,11 @@ public class Motorista {
     }
 
     //getters e setters classe motorista
-    public static int getId() {
+    public int getId() {
         return id;
     }
 
-    public static void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
