@@ -9,8 +9,14 @@ import com.nohair.controle.IMotoristaControle;
 import com.nohair.controle.MotoristaControle;
 import com.nohair.modelos.Motorista;
 import com.nohair.persistencia.MotoristaDao;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -18,12 +24,24 @@ import javax.swing.JOptionPane;
  */
 public class TelaAdminCadMotorista extends javax.swing.JFrame {
     IMotoristaControle MotoristaControle = new MotoristaControle();
+    
+    //Mascaras Motorista ...
+    private MaskFormatter telefoneMask;
+    private MaskFormatter numeroCNHMask;
+    private MaskFormatter vencimentoMask;
+    
+    
 
     /** Creates new form TelaAdminCadMotorista */
-    public TelaAdminCadMotorista() {
+    public TelaAdminCadMotorista() throws ParseException {
         initComponents();
         MotoristaDao objeto = new MotoristaDao();
         objeto.ChecarTxt();
+        // Inicializa a Mascara CNPJ / CPF / ...
+            telefoneMask = new MaskFormatter("(##)#####-####");
+            numeroCNHMask = new MaskFormatter("#########-##");
+            vencimentoMask = new MaskFormatter("##/##/####");
+            
         this.setLocationRelativeTo(null);
          try {
              ArrayList<Motorista> lista = MotoristaControle.listagem();
@@ -176,6 +194,15 @@ public class TelaAdminCadMotorista extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Motorista Cadastrado com sucesso");
             //imprimirDadosNaGrid(MotoristaControle.listagem());
             
+            /*
+                    jTextField1TelefoneMotorista.setFormatterFactory(new DefaultFormatterFactory(telefoneMask));
+                    jTextField1TelefoneMotorista.setValue(null);
+                    jTextField1NumeroCNH.setFormatterFactory(new DefaultFormatterFactory(numeroCNHMask));
+                    jTextField1NumeroCNH.setValue(null);
+                    jTextField1VencimentoCNH.setFormatterFactory(new DefaultFormatterFactory(vencimentoMask));
+                    jTextField1VencimentoCNH.setValue(null);
+                  */  
+            
             }                
             else{
                 //Se houver campo vazio no cadastro e mostrado uma mensagem !
@@ -228,7 +255,11 @@ public class TelaAdminCadMotorista extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaAdminCadMotorista().setVisible(true);
+                try {
+                    new TelaAdminCadMotorista().setVisible(true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(TelaAdminCadMotorista.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
