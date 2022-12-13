@@ -1,3 +1,0 @@
-66;bruno;(62)98297-1994;rua 200, lua;1231241414;12/12/12
-67;Igor;(62)88888-8888;Rua Aleatoria;111111111-11;13/13/13
-68;teste;teste;teste;teste;teste

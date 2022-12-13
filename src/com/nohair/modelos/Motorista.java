@@ -9,21 +9,29 @@ public class Motorista {
     private String endereco;
     private String numeroCNH;
     private String dataVencimentoCNH;
+    private String fotoMotoristaURL;
 
 
     //construtor classe motorista
-    public Motorista(int id, String nome, String telefone, String endereco, String numeroCNH, String dataVencimentoCNH) {
+    public Motorista(int id, String nome, String telefone, String endereco, String numeroCNH, String dataVencimentoCNH, String fotoMotoristaURL) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
         this.numeroCNH = numeroCNH;
         this.dataVencimentoCNH = dataVencimentoCNH;
+        this.fotoMotoristaURL = fotoMotoristaURL;
     }
 
     public Motorista() {
 
     }
+
+    public Motorista(int i, String text, String text0, String text1, String text2, String text3) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
 
     //getters e setters classe motorista
     public int getId() {
@@ -74,10 +82,20 @@ public class Motorista {
         this.dataVencimentoCNH = dataVencimentoCNH;
     }
 
+    public String getFotoMotoristaURL() {
+        return fotoMotoristaURL;
+    }
+
+    public void setFotoMotoristaURL(String fotoMotoristaURL) {
+        this.fotoMotoristaURL = fotoMotoristaURL;
+    }
+    
+    
+
     //toString classe motorista
     @Override
     public String toString() {
-        return id + ";" + nome + ";" + telefone + ";" + endereco + ";" + numeroCNH + ";" + dataVencimentoCNH;
+        return id + ";" + nome + ";" + telefone + ";" + endereco + ";" + numeroCNH + ";" + dataVencimentoCNH + ";" + fotoMotoristaURL;
     }
 
 

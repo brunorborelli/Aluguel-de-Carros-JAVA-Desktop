@@ -53,6 +53,7 @@ public class MotoristaDao implements IMotoristaDao {
                 objetoMotorista.setEndereco(vetorString[3]);
                 objetoMotorista.setNumeroCNH(vetorString[4]);
                 objetoMotorista.setDataVencimentoCNH(vetorString[5]);
+                objetoMotorista.setFotoMotoristaURL(vetorString[6]);
                 listaDeMotorista.add(objetoMotorista);
             }
             br.close();
