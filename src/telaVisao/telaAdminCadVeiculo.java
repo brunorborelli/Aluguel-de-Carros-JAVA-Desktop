@@ -220,7 +220,7 @@ public class telaAdminCadVeiculo extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-         telaAdminCadMarca f = new telaAdminCadMarca();
+         TelaDasMarcas f = new TelaDasMarcas();
             //this.dispose();   Esse comando tem a função de fechar a página de origem ao abrir a nova
             f.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed

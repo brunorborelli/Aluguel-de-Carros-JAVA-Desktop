@@ -57,20 +57,21 @@ public class VeiculosDao implements IVeiculosDao{
             Iterator<Veiculos> lista = listagem().iterator();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
             //Criar o buffer do arquivo
-           BufferedWriter bw =new BufferedWriter(fw);
-            while(lista.hasNext()){
-                Veiculos aux = lista.next();
-                if(aux.getId()== objeto.getId()){
-                     bw.write(objeto.toString()+"\n");
-                }
-                else{
-                    bw.write(aux.toString()+"\n");
-                }
-               }// GRAVAR NO ARQUIVO OBJETO
+            BufferedWriter bw =new BufferedWriter(fw);
+                while(lista.hasNext()){
+                    Veiculos aux = lista.next();
+                        if(aux.getId()== objeto.getId()){
+                            bw.write(objeto.toString()+"\n");
+                        }
+                        else{
+                            bw.write(aux.toString()+"\n");
+                        }
+                }// GRAVAR NO ARQUIVO OBJETO
             bw.close();
-         } catch(Exception erro){
-         throw erro;
-        }   
+         } 
+         catch(Exception erro){
+               throw erro;
+         }   
     }
 
     @Override
@@ -99,22 +100,24 @@ public class VeiculosDao implements IVeiculosDao{
                     String vetorString[] = linha.split(";");
                 
                     objetoVeiculos.setId(Integer.parseInt(vetorString[0]));
-                
-                    objetoVeiculos.setPlaca(vetorString[1]); 
-                
-                    objetoVeiculos.setRenavam(vetorString[2]);
-                
-                    objetoVeiculos.setPr_Compra(vetorString[3]);
-                               
-                    objetoVeiculos.setPr_Venda(vetorString[4]);
-                
-                    objetoVeiculos.setAno_Fab(vetorString[5]);
                     
-                    objetoVeiculos.setAno_Modelo(vetorString[6]);
+                    objetoVeiculos.setMarca(vetorString[1]);
                 
-                    objetoVeiculos.setCombustivel(vetorString[7]);
+                    objetoVeiculos.setPlaca(vetorString[2]); 
                 
-                    objetoVeiculos.setQuilometragem(vetorString[8]);
+                    objetoVeiculos.setRenavam(vetorString[3]);
+                
+                    objetoVeiculos.setPr_Compra(vetorString[4]);
+                               
+                    objetoVeiculos.setPr_Venda(vetorString[5]);
+                
+                    objetoVeiculos.setAno_Fab(vetorString[6]);
+                    
+                    objetoVeiculos.setAno_Modelo(vetorString[7]);
+                
+                    objetoVeiculos.setCombustivel(vetorString[8]);
+                
+                    objetoVeiculos.setQuilometragem(vetorString[9]);
                 
                     listaDeVeiculos.add(objetoVeiculos);
                 }

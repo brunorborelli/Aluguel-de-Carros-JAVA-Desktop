@@ -1,1 +1,4 @@
-23;dadsadada;
+78;DODGE;./src/com/nohair/dados/img/Logos Marcas/ram.png
+79;BMW;./src/com/nohair/dados/img/Logos Marcas/Bmw.png
+80;FIAT;./src/com/nohair/dados/img/Logos Marcas/Fiat.png
+81;VOLKSWAGEN;./src/com/nohair/dados/img/Logos Marcas/Volkswagen.png

@@ -44,6 +44,22 @@ import javax.swing.JComboBox;
 import javax.swing.JToggleButton;
 import javax.swing.JComponent;
 
+//Bliblioteca Marca
+import com.nohair.controle.IMarcaControle;
+import com.nohair.controle.MarcaControle;
+import com.nohair.modelos.Marca;
+import com.nohair.persistencia.IMarcaDao;
+import com.nohair.persistencia.MarcaDao;
+import com.nohair.util.renderizador.jTableRender;
+
+//Combobox teste
+import com.nohair.controle.IModeloControle;
+import com.nohair.controle.ModeloControle;
+import com.nohair.modelos.Modelo;
+import com.nohair.util.id.GeradorID;
+import java.awt.List;
+import javax.swing.table.TableCellRenderer;
+
 
 
 public class TelaDeVeiculos extends javax.swing.JFrame {
@@ -53,6 +69,10 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
     
     //Atributos 
     IVeiculosControle VeiculosControle = new VeiculosControle();
+    
+    //Combobox Marca
+    IModeloControle modeloControle = new ModeloControle();
+    IMarcaControle marcaControle = new MarcaControle();
     
     //Mascaras dos TextField ...
     private MaskFormatter PlacaMask;
@@ -65,6 +85,21 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
     public TelaDeVeiculos(){
         try{
             initComponents();
+            
+            //Le e mostra as marcas cadastradas
+            try {
+                ArrayList<Modelo> lista = modeloControle.listagem();
+                    CB_Marca.removeAll();
+                    
+                    ArrayList<Marca> modelo =  marcaControle.listagem();
+         
+                    for(Marca md : modelo){
+                        CB_Marca.addItem(md.getDescricao());
+                    }
+            } 
+            catch (Exception erro) {
+                JOptionPane.showMessageDialog(this, erro);  
+            }
             
             //Combobox inicializa Vazia
             CB_Combustivel.setSelectedIndex(-1);
@@ -146,6 +181,8 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         buttonGroup5 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        Bt_Vlt_Veiculos = new javax.swing.JButton();
+        Fundo = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButtonBuscar = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
@@ -190,7 +227,7 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         jRadioButtonMenuItem2.setSelected(true);
         jRadioButtonMenuItem2.setText("jRadioButtonMenuItem2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de Cadastro de Veiculos");
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 153));
@@ -199,22 +236,35 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cadastro de Veiculos");
 
+        Bt_Vlt_Veiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nohair/dados/img/Icones/Voltar.png"))); // NOI18N
+        Bt_Vlt_Veiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_Vlt_VeiculosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(Bt_Vlt_Veiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(17, 17, 17))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(Bt_Vlt_Veiculos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        Fundo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 153));
         jPanel2.setForeground(new java.awt.Color(255, 255, 153));
@@ -341,7 +391,6 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("Modelo:");
 
-        CB_Marca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_Marca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CB_MarcaActionPerformed(evt);
@@ -407,18 +456,14 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
+                                .addGap(15, 15, 15)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(Bt_PAntiga))
                                 .addGap(26, 26, 26)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(0, 20, Short.MAX_VALUE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(Bt_Mercosul)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jLabel3)
+                                    .addComponent(Bt_Mercosul)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addComponent(CPF_CNPJ)
@@ -429,6 +474,7 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                                 .addComponent(jLabel19)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CB_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 20, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
@@ -450,8 +496,8 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                             .addComponent(Txt_Pr_Venda)
                             .addComponent(Txt_Ano_Fab)
                             .addComponent(Txt_Ano_Modelo)
-                            .addComponent(CB_Combustivel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Txt_km, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
+                            .addComponent(CB_Combustivel, 0, 130, Short.MAX_VALUE)
+                            .addComponent(Txt_km, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -467,7 +513,7 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Txt_Renavam, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(45, 45, 45))
+                .addGap(15, 15, 15))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,7 +576,7 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Txt_Placa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CPF_CNPJ))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Txt_Ano_Fab, Txt_Ano_Modelo, Txt_Placa, Txt_Renavam});
@@ -557,40 +603,59 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        javax.swing.GroupLayout FundoLayout = new javax.swing.GroupLayout(Fundo);
+        Fundo.setLayout(FundoLayout);
+        FundoLayout.setHorizontalGroup(
+            FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FundoLayout.createSequentialGroup()
+                .addGroup(FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FundoLayout.createSequentialGroup()
+                        .addContainerGap(59, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE))
+                    .addGroup(FundoLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+        FundoLayout.setVerticalGroup(
+            FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FundoLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(FundoLayout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addGap(18, 18, 18))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Fundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(Fundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -655,7 +720,7 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                && !Txt_Ano_Fab.getText().equals("") && !Txt_Ano_Modelo.getText().equals("")&& !Txt_km.getText().equals("")){
                 
                     //Construtor Cliente
-                    Veiculos objeto = new Veiculos(0,Txt_Placa.getText(),Txt_Renavam.getText(),Txt_Pr_Compra.getText(),
+                    Veiculos objeto = new Veiculos(0,String.valueOf(CB_Marca.getSelectedItem()),Txt_Placa.getText(),Txt_Renavam.getText(),Txt_Pr_Compra.getText(),
                     Txt_Pr_Venda.getText(),Txt_Ano_Fab.getText(),Txt_Ano_Modelo.getText(),String.valueOf(CB_Combustivel.getSelectedItem()),Txt_km.getText());
             
                     VeiculosControle.incluir(objeto);
@@ -744,6 +809,7 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                 CB_Marca.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),1).toString());
                 CB_Modelo.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),2).toString());                
                 CB_Tipo.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),3).toString());*/
+                
                 Txt_Placa.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),4).toString());
                 Txt_Renavam.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),5).toString());
                 Txt_Pr_Compra.setText(jTableVeiculos.getValueAt(jTableVeiculos.getSelectedRow(),6).toString());
@@ -762,7 +828,7 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
 	try {          
-            Veiculos objeto = new Veiculos(0,Txt_Placa.getText(),Txt_Renavam.getText(),Txt_Pr_Compra.getText(),
+            Veiculos objeto = new Veiculos(0,CB_Marca.getSelectedItem().toString(),Txt_Placa.getText(),Txt_Renavam.getText(),Txt_Pr_Compra.getText(),
                     Txt_Pr_Venda.getText(),Txt_Ano_Fab.getText(), Txt_Ano_Modelo.getText(),CB_Combustivel.getSelectedItem().toString(),Txt_km.getText());
             
             VeiculosControle.alterar(objeto);
@@ -839,6 +905,12 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Bt_PAntigaMouseClicked
 
+    private void Bt_Vlt_VeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Vlt_VeiculosActionPerformed
+        telaAdminOpcoes f = new telaAdminOpcoes();
+        this.dispose();
+        f.setVisible(true);
+    }//GEN-LAST:event_Bt_Vlt_VeiculosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -883,11 +955,13 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
     private javax.swing.JButton Bt_Add_Foto;
     private javax.swing.JRadioButton Bt_Mercosul;
     private javax.swing.JRadioButton Bt_PAntiga;
+    private javax.swing.JButton Bt_Vlt_Veiculos;
     private javax.swing.JComboBox<String> CB_Combustivel;
     private javax.swing.JComboBox<String> CB_Marca;
     private javax.swing.JComboBox<String> CB_Modelo;
     private javax.swing.JComboBox<String> CB_Tipo;
     private javax.swing.JLabel CPF_CNPJ;
+    private javax.swing.JPanel Fundo;
     private javax.swing.JFormattedTextField Txt_Ano_Fab;
     private javax.swing.JFormattedTextField Txt_Ano_Modelo;
     private javax.swing.JFormattedTextField Txt_Placa;

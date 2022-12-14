@@ -38,6 +38,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Consulta");
 
@@ -92,6 +93,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
             }
         });
 
+
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton7.setText("Buscar Motorista");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +107,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
+
             }
         });
 
@@ -114,6 +117,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
+
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -130,20 +134,27 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
                             .addComponent(Bt_Buscar_Cliente, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(40, Short.MAX_VALUE))
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Bt_Cad_Veiculos)
-                    .addComponent(jButton2))
-                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(Bt_Cad_Marcas, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(Bt_Cad_Veiculos)))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Bt_Cad_Cliente)
                     .addComponent(Bt_Buscar_Cliente))
+
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
@@ -153,7 +164,10 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
                     .addComponent(jButton7)
                     .addComponent(jButton8))
                 .addGap(26, 26, 26))
+
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Bt_Cad_Marcas, Bt_Cad_Veiculos});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -198,6 +212,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Bt_Buscar_ClienteActionPerformed
 
+
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         TelaAdminBuscarMotorista f = new TelaAdminBuscarMotorista();
@@ -218,6 +233,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
             b.setVisible(true);
         
     }//GEN-LAST:event_jButton8ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -257,6 +273,7 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bt_Buscar_Cliente;
     private javax.swing.JButton Bt_Cad_Cliente;
+    private javax.swing.JButton Bt_Cad_Marcas;
     private javax.swing.JButton Bt_Cad_Veiculos;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;

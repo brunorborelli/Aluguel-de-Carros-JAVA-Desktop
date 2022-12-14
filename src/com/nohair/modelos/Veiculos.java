@@ -23,7 +23,7 @@ public class Veiculos {
     public Veiculos(){
     }
     
-    public Veiculos(int id, String Placa, String Renavam, String Pr_Compra, String Pr_Venda, String Ano_Fab, String Ano_Modelo,
+    public Veiculos(int id,String Marca, String Placa, String Renavam, String Pr_Compra, String Pr_Venda, String Ano_Fab, String Ano_Modelo,
             String Combustivel, String Quilometragem){
         
         this.id = id;
@@ -141,7 +141,7 @@ public class Veiculos {
 
     @Override
     public String toString() {
-        return id + ";" + Placa + ";" + Renavam + ";" + Pr_Compra + ";"+ Pr_Venda + ";" + Ano_Fab + ";"+ Ano_Modelo
+        return id + ";" + Marca + ";" + Placa + ";" + Renavam + ";" + Pr_Compra + ";"+ Pr_Venda + ";" + Ano_Fab + ";"+ Ano_Modelo
                 + ";"+ Combustivel + ";" + Quilometragem + ";";
     }
     

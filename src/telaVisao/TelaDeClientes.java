@@ -59,6 +59,9 @@ public class TelaDeClientes extends javax.swing.JFrame {
         try{
             initComponents();
             
+            ClientesDao objeto = new ClientesDao();
+            objeto.ChecarTxt();
+            
             // Inicializa a Mascara CNPJ / CPF / ...
             CNPJMask = new MaskFormatter("##.###.###/####-##");
             CPFMask = new MaskFormatter("###.###.###-##");
@@ -143,6 +146,8 @@ public class TelaDeClientes extends javax.swing.JFrame {
         jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        Bt_Vlt_Clientes = new javax.swing.JButton();
+        Fundo = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButtonBuscar = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
@@ -189,7 +194,7 @@ public class TelaDeClientes extends javax.swing.JFrame {
         jRadioButtonMenuItem2.setSelected(true);
         jRadioButtonMenuItem2.setText("jRadioButtonMenuItem2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de Cadastro de Clientes");
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 153));
@@ -198,22 +203,35 @@ public class TelaDeClientes extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cadastro de Clientes");
 
+        Bt_Vlt_Clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nohair/dados/img/Icones/Voltar.png"))); // NOI18N
+        Bt_Vlt_Clientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_Vlt_ClientesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(249, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(Bt_Vlt_Clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(17, 17, 17))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Bt_Vlt_Clientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
+
+        Fundo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 153));
         jPanel2.setForeground(new java.awt.Color(255, 255, 153));
@@ -280,7 +298,7 @@ public class TelaDeClientes extends javax.swing.JFrame {
                 .addComponent(jButtonAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonNovoCadastro)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -377,7 +395,6 @@ public class TelaDeClientes extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        Txt_Telef.setText("");
         Txt_Telef.setMinimumSize(new java.awt.Dimension(64, 29));
         Txt_Telef.setPreferredSize(new java.awt.Dimension(96, 29));
 
@@ -386,7 +403,6 @@ public class TelaDeClientes extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        Txt_Data_Nasc.setText("");
         Txt_Data_Nasc.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         Txt_Data_Nasc.setMinimumSize(new java.awt.Dimension(64, 29));
 
@@ -395,7 +411,6 @@ public class TelaDeClientes extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        Txt_CEP.setText("");
         Txt_CEP.setPreferredSize(new java.awt.Dimension(64, 29));
 
         Txt_Email.setPreferredSize(new java.awt.Dimension(64, 29));
@@ -423,7 +438,7 @@ public class TelaDeClientes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Bt_P_Juridica))
                     .addComponent(Txt_Caminho_Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 154, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -489,7 +504,7 @@ public class TelaDeClientes extends javax.swing.JFrame {
                         .addComponent(PFisica_Pjuridica)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Txt_NomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Txt_Bairro, Txt_CEP, Txt_Cidade, Txt_Estado});
@@ -580,43 +595,57 @@ public class TelaDeClientes extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        javax.swing.GroupLayout FundoLayout = new javax.swing.GroupLayout(Fundo);
+        Fundo.setLayout(FundoLayout);
+        FundoLayout.setHorizontalGroup(
+            FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FundoLayout.createSequentialGroup()
+                        .addGap(0, 73, Short.MAX_VALUE)
+                        .addGroup(FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(85, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FundoLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())))
+        );
+        FundoLayout.setVerticalGroup(
+            FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FundoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FundoLayout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(Fundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(Fundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -949,6 +978,12 @@ public class TelaDeClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonNovoCadastroActionPerformed
 
+    private void Bt_Vlt_ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Vlt_ClientesActionPerformed
+            telaAdminOpcoes f = new telaAdminOpcoes();
+            this.dispose();
+            f.setVisible(true);
+    }//GEN-LAST:event_Bt_Vlt_ClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -991,7 +1026,9 @@ public class TelaDeClientes extends javax.swing.JFrame {
     private javax.swing.JButton Bt_Add_Foto;
     private javax.swing.JRadioButton Bt_P_Fisica;
     private javax.swing.JRadioButton Bt_P_Juridica;
+    private javax.swing.JButton Bt_Vlt_Clientes;
     private javax.swing.JLabel CPF_CNPJ;
+    private javax.swing.JPanel Fundo;
     private javax.swing.JLabel PFisica_Pjuridica;
     private javax.swing.JTextField Txt_Bairro;
     private javax.swing.JFormattedTextField Txt_CEP;
