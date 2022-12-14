@@ -14,6 +14,9 @@ public class Categoria {
     private float valorDaLocacao = 0;
     
     public Categoria() {
+        this.id = id;
+        this.descricao = descricao;
+        this.valorDaLocacao = valorDaLocacao;
     }
 
     public Categoria(int id, String descricao, float valorDaLocacao) {

@@ -4,7 +4,7 @@
  */
 package com.nohair.persistencia;
 
-import com.nohair.modelos.Categoria;
+import com.nohair.modelos.Acessorios;
 import com.nohair.util.id.GeradorID;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,15 +19,15 @@ import java.util.Iterator;
  *
  * @author bruno
  */
-public class CategoriaDao implements ICategoriaDao{
+public class AcessoriosDao implements IAcessoriosDao {
     private String nomeDoArquivoNoDisco;
 
-    public CategoriaDao() {
-        nomeDoArquivoNoDisco = "./src/com/nohair/dados/txt/Categoria.txt";
+    public AcessoriosDao() {
+        nomeDoArquivoNoDisco = "./src/com/nohair/dados/txt/Acessorios.txt";
     }
 
     @Override
-    public void incluir(Categoria objeto) throws Exception {
+    public void incluir(Acessorios objeto) throws Exception {
         try {
             //cria o arquivo
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
@@ -45,15 +45,15 @@ public class CategoriaDao implements ICategoriaDao{
     }
 
     @Override
-    public void alterar(Categoria objeto) throws Exception {
+    public void alterar(Acessorios objeto) throws Exception {
         try {
-            Categoria objetoCategoria = new Categoria();
-            Iterator<Categoria> lista = listagem().iterator();
+            Acessorios objetoAcessorios = new Acessorios();
+            Iterator<Acessorios> lista = listagem().iterator();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
             BufferedWriter bw = new BufferedWriter(fw);
 
             while (lista.hasNext()) {
-                Categoria aux = lista.next();
+                Acessorios aux = lista.next();
                 if (aux.getId() == objeto.getId()) {
                     bw.write(objeto.toString() + "\n");
 
@@ -69,59 +69,57 @@ public class CategoriaDao implements ICategoriaDao{
     }
 
     @Override
-    public ArrayList<Categoria> listagem() throws Exception {
+    public ArrayList<Acessorios> listagem() throws Exception {
         try {
-            ArrayList<Categoria> listaDeCategoria = new ArrayList<Categoria>();
-            File arquivo = new File("./src/com/nohair/dados/txt/Categoria.txt");
+            ArrayList<Acessorios> listaDeAcessorios = new ArrayList<Acessorios>();
+            File arquivo = new File("./src/com/nohair/dados/txt/Acessorios.txt");
             if(!arquivo.exists()){
                 arquivo.createNewFile();
-                nomeDoArquivoNoDisco = "./src/com/nohair/dados/txt/Categoria.txt";
+                nomeDoArquivoNoDisco = "./src/com/nohair/dados/txt/Acessorios.txt";
             }
             FileReader fr = new FileReader(nomeDoArquivoNoDisco);
             BufferedReader br = new BufferedReader(fr);
             String linha = "";
             while ((linha = br.readLine()) != null) {
-                Categoria objetoCategoria = new Categoria();
+                Acessorios objetoAcessorios = new Acessorios();
                 String vetorString[] = linha.split(";");
-                objetoCategoria.setId(Integer.parseInt(vetorString[0]));
-                objetoCategoria.setDescricao(vetorString[1]);
-                objetoCategoria.setValorDaLocacao(Float.parseFloat(vetorString[2]));
-                listaDeCategoria.add(objetoCategoria);
+                objetoAcessorios.setId(Integer.parseInt(vetorString[0]));
+                objetoAcessorios.setDescricao(vetorString[1]);
+                objetoAcessorios.setValorDaLocacao(Float.parseFloat(vetorString[2]));
+                objetoAcessorios.setSituacao(vetorString[3]);
+                listaDeAcessorios.add(objetoAcessorios);
             }
             br.close();
-            return listaDeCategoria;
+            return listaDeAcessorios;
         } catch (Exception erro) {
             throw erro;
         }
     }
 public void ChecarTxt(){
             try{
-                File Categoria = new File("./src/com/nohair/dados/txt/Categoria.txt");
-                if(!Categoria.exists()){
-                    Categoria.createNewFile();
+                File Admin = new File("./src/com/nohair/dados/txt/Acessorio.txt");
+                if(!Admin.exists()){
+                    Admin.createNewFile();
                 }
             }catch(IOException ex){
                 
             }}
     @Override
-    public Categoria buscar(int id) throws Exception {
+    public Acessorios buscar(int id) throws Exception {
         FileReader fr = new FileReader(nomeDoArquivoNoDisco);
         BufferedReader br = new BufferedReader(fr);
         String linha = "";
         while ((linha = br.readLine()) != null) {
-            Categoria objetoCategoria = new Categoria();
+            Acessorios objetoAcessorios = new Acessorios();
             String vetorString[] = linha.split(";");
-            objetoCategoria.setId(Integer.parseInt(vetorString[0]));
-            objetoCategoria.setDescricao(vetorString[1]);
-            objetoCategoria.setValorDaLocacao(Float.parseFloat(vetorString[2]));
-            if (objetoCategoria.getId() == id) {
+            objetoAcessorios.setId(Integer.parseInt(vetorString[0]));
+            objetoAcessorios.setDescricao(vetorString[1]);
+            objetoAcessorios.setValorDaLocacao(Float.parseFloat(vetorString[2]));
+            if (objetoAcessorios.getId() == id) {
                 br.close();
-                return new Categoria((Integer.parseInt(vetorString[0])), vetorString[1], Float.parseFloat(vetorString[2]));
+                return new Acessorios((Integer.parseInt(vetorString[0])), vetorString[1], Float.parseFloat(vetorString[2]),vetorString[3]);
             }
         }
-        
-        
         return null;
     }
 }
-

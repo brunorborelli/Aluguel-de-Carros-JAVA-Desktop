@@ -1,4 +1,4 @@
-75;Economico;75
-76;Conforto;100
-77;Luxo;150
-78;Esportivo;170
+75;Economico;75.0
+76;Conforto;99.9
+77;Luxo;150.0
+78;Esportivo;320.0
