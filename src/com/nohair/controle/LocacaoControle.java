@@ -4,6 +4,11 @@
  */
 package com.nohair.controle;
 
+import com.nohair.modelos.Locacao;
+import com.nohair.persistencia.ILocacaoDao;
+import com.nohair.persistencia.LocacaoDao;
+import java.util.ArrayList;
+
 
 
 /**
@@ -12,5 +17,20 @@ package com.nohair.controle;
  */
 public class LocacaoControle implements ILocacaoControle{
     
+ILocacaoDao locacaoPersistencia = new LocacaoDao();
 
+    @Override
+    public void locar(Locacao objeto) throws Exception {
+        locacaoPersistencia.locar(objeto);
+    }
+
+    @Override
+    public void devolver(Locacao objeto) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<Locacao> listagem() throws Exception {
+        return locacaoPersistencia.listagem();
+    }
 }

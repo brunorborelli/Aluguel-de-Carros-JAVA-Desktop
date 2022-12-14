@@ -14,4 +14,5 @@ public interface IVeiculosDao {
     void alterar(Veiculos objeto)throws Exception;
     void procurar(Veiculos objeto)throws Exception;
     ArrayList<Veiculos> listagem()throws Exception;
+    Veiculos buscar(int id) throws Exception;
 }

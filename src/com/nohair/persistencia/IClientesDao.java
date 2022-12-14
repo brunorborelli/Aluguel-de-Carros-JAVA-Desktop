@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package com.nohair.persistencia;
+import com.nohair.enumeracao.TipoDeCliente;
 import com.nohair.modelos.Clientes;
 import java.util.ArrayList;
 /**
@@ -14,4 +15,5 @@ public interface IClientesDao {
     void alterar(Clientes objeto)throws Exception;
     void procurar(Clientes objeto)throws Exception;
     ArrayList<Clientes> listagem()throws Exception;
+   
 }

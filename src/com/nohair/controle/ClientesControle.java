@@ -4,6 +4,7 @@
  */
 package com.nohair.controle;
 
+import com.nohair.enumeracao.TipoDeCliente;
 import com.nohair.modelos.Clientes;
 import com.nohair.persistencia.ClientesDao;
 
@@ -71,4 +72,16 @@ public class ClientesControle implements IClientesControle{
         return ClientesPersistencia.listagem(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    /*
+    public Clientes buscar(int id, TipoDeCliente tipoDoCliente) throws Exception {
+
+        return ClientesPersistencia.buscar(id, tipoDoCliente);
+
+    }
+    
+    public void verTxt() throws Exception {
+
+        ClientesPersistencia.verTxt();
+    }
+*/
 }

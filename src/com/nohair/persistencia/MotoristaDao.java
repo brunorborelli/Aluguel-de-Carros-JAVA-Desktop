@@ -79,7 +79,28 @@ public class MotoristaDao implements IMotoristaDao {
         } catch(Exception erro){
             throw erro;
         }
+    }
 
+        @Override
+    public Motorista buscar(int id) throws Exception {
+        FileReader fr = new FileReader(nomeDoArquivoNoDisco);
+        BufferedReader br = new BufferedReader(fr);
+        String linha = "";
+        while ((linha = br.readLine()) != null) {
+            Motorista objetoMotorista = new Motorista();
+            String vetorString[] = linha.split(";");
+            objetoMotorista.setId(Integer.parseInt(vetorString[0]));
+                objetoMotorista.setNome(vetorString[1]);
+                objetoMotorista.setTelefone(vetorString[2]);
+                objetoMotorista.setEndereco(vetorString[3]);
+                objetoMotorista.setNumeroCNH(vetorString[4]);
+                objetoMotorista.setDataVencimentoCNH(vetorString[5]);
+                objetoMotorista.setFotoMotoristaURL(vetorString[6]);
+                br.close();
+                return new Motorista((Integer.parseInt(vetorString[0])), vetorString[1], vetorString[2],vetorString[3],vetorString[4],vetorString[5],vetorString[6]);
+            }
+        
+        return null;
 
     }
     public void ChecarTxt(){

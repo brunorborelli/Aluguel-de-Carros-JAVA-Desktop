@@ -55,6 +55,7 @@ import com.nohair.util.renderizador.jTableRender;
 //Combobox teste
 import com.nohair.controle.IModeloControle;
 import com.nohair.controle.ModeloControle;
+import com.nohair.enumeracao.TipoDeVeiculo;
 import com.nohair.modelos.Modelo;
 import com.nohair.util.id.GeradorID;
 import java.awt.List;
@@ -88,14 +89,29 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
             
             //Le e mostra as marcas cadastradas
             try {
-                ArrayList<Modelo> lista = modeloControle.listagem();
+                /*ArrayList<Modelo> lista = modeloControle.listagem();
                     CB_Marca.removeAll();
                     
-                    ArrayList<Marca> modelo =  marcaControle.listagem();
+                ArrayList<Marca> modelo =  marcaControle.listagem();
          
                     for(Marca md : modelo){
                         CB_Marca.addItem(md.getDescricao());
                     }
+                 */
+                ArrayList<Modelo>lista = modeloControle.listagem();
+                    CB_Marca.removeAll();
+                    CB_Modelo.removeAll();
+                    
+                    for(Modelo md : lista){
+                        CB_Modelo.addItem(md.getDescricao());
+                    }
+                    
+                    ArrayList<Marca> modelo = marcaControle.listagem();
+                    
+                    for(Marca md1 : modelo){
+                        CB_Marca.addItem(md1.getDescricao());
+                    }
+                    
             } 
             catch (Exception erro) {
                 JOptionPane.showMessageDialog(this, erro);  
@@ -209,7 +225,6 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         CB_Modelo = new javax.swing.JComboBox<>();
         Txt_Ano_Fab = new javax.swing.JFormattedTextField();
         Txt_Ano_Modelo = new javax.swing.JFormattedTextField();
-        CB_Combustivel = new javax.swing.JComboBox<>();
         Txt_km = new javax.swing.JFormattedTextField();
         Txt_Pr_Venda = new javax.swing.JFormattedTextField();
         Txt_Pr_Compra = new javax.swing.JFormattedTextField();
@@ -218,6 +233,7 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        CB_Combustivel = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         Area_Logo = new javax.swing.JLabel();
 
@@ -250,9 +266,9 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Bt_Vlt_Veiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,24 +413,16 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
             }
         });
 
-        CB_Tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_Tipo.setModel(new javax.swing.DefaultComboBoxModel(TipoDeVeiculo.values()));
         CB_Tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CB_TipoActionPerformed(evt);
             }
         });
 
-        CB_Modelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_Modelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CB_ModeloActionPerformed(evt);
-            }
-        });
-
-        CB_Combustivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gasolina", "Etanol", "GNV", "Diesel", "Eletrico" }));
-        CB_Combustivel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CB_CombustivelActionPerformed(evt);
             }
         });
 
@@ -446,6 +454,13 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setText("Preco de Compra:");
+
+        CB_Combustivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GASOLINA", "DIESEL", "FLEX", "ELETRICO", "GNV", "ETANOL" }));
+        CB_Combustivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CB_CombustivelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -492,12 +507,12 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Txt_Pr_Compra)
+                            .addComponent(Txt_Pr_Compra, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(Txt_Pr_Venda)
                             .addComponent(Txt_Ano_Fab)
                             .addComponent(Txt_Ano_Modelo)
-                            .addComponent(CB_Combustivel, 0, 130, Short.MAX_VALUE)
-                            .addComponent(Txt_km, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(Txt_km, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(CB_Combustivel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -561,12 +576,12 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
                             .addComponent(Txt_Ano_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CB_Combustivel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel13)
+                            .addComponent(CB_Combustivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
@@ -607,22 +622,20 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         Fundo.setLayout(FundoLayout);
         FundoLayout.setHorizontalGroup(
             FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FundoLayout.createSequentialGroup()
+            .addGroup(FundoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FundoLayout.createSequentialGroup()
                 .addGroup(FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FundoLayout.createSequentialGroup()
-                        .addContainerGap(59, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE))
-                    .addGroup(FundoLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FundoLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FundoLayout.createSequentialGroup()
+                        .addGap(0, 53, Short.MAX_VALUE)
+                        .addGroup(FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(52, Short.MAX_VALUE))))
         );
         FundoLayout.setVerticalGroup(
             FundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -873,11 +886,8 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
 
     private void CB_TipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_TipoActionPerformed
         // TODO add your handling code here:
+        TipoDeVeiculo.values();
     }//GEN-LAST:event_CB_TipoActionPerformed
-
-    private void CB_CombustivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_CombustivelActionPerformed
-
-    }//GEN-LAST:event_CB_CombustivelActionPerformed
 
     private void Bt_MercosulMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Bt_MercosulMouseClicked
         try{
@@ -910,6 +920,10 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         this.dispose();
         f.setVisible(true);
     }//GEN-LAST:event_Bt_Vlt_VeiculosActionPerformed
+
+    private void CB_CombustivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_CombustivelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CB_CombustivelActionPerformed
 
     /**
      * @param args the command line arguments

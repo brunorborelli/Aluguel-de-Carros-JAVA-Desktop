@@ -4,10 +4,19 @@
  */
 package com.nohair.persistencia;
 
+import com.nohair.modelos.Locacao;
+import java.util.ArrayList;
+
 /**
  *
  * @author bruno
  */
 public interface ILocacaoDao {
-    
+
+    void locar(Locacao objeto) throws Exception;
+
+    void devolver(Locacao objeto) throws Exception;
+
+    ArrayList<Locacao> listagem() throws Exception;
+
 }

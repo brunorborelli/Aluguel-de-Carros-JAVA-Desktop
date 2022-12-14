@@ -128,7 +128,40 @@ public class VeiculosDao implements IVeiculosDao{
             throw erro;
         }
     }
-    
+    @Override
+    public Veiculos buscar(int id) throws Exception {
+        FileReader fr = new FileReader(nomeDoArquivoNoDisco);
+        BufferedReader br = new BufferedReader(fr);
+        String linha = "";
+        while ((linha = br.readLine()) != null) {
+            Veiculos objetoVeiculos = new Veiculos();
+            String vetorString[] = linha.split(";");
+            objetoVeiculos.setId(Integer.parseInt(vetorString[0]));
+                objetoVeiculos.setMarca(vetorString[1]);
+                
+                    objetoVeiculos.setPlaca(vetorString[2]); 
+                
+                    objetoVeiculos.setRenavam(vetorString[3]);
+                
+                    objetoVeiculos.setPr_Compra(vetorString[4]);
+                               
+                    objetoVeiculos.setPr_Venda(vetorString[5]);
+                
+                    objetoVeiculos.setAno_Fab(vetorString[6]);
+                    
+                    objetoVeiculos.setAno_Modelo(vetorString[7]);
+                
+                    objetoVeiculos.setCombustivel(vetorString[8]);
+                
+                    objetoVeiculos.setQuilometragem(vetorString[9]);
+                    
+                br.close();
+                return new Veiculos((Integer.parseInt(vetorString[0])), vetorString[1], vetorString[2],vetorString[3],vetorString[4],vetorString[5],vetorString[6],vetorString[7],vetorString[8],vetorString[9]);
+            }
+        
+        return null;
+    }
+
     public void ChecarTxt(){
         try{
             File Veiculos = new File("./src/com/nohair/dados/txt/Veiculos.txt");
