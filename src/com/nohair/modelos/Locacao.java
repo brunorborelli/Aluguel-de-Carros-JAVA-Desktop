@@ -1,42 +1,79 @@
 package com.nohair.modelos;
 
 public class Locacao {
-    //atributos da classe locação id, dataInicio, dataFim, valorDaLocacao, situacao
+    public class Locacao {
+    
     private int id;
+    private Clientes cliente;
+    private Motorista motorista;
+    private Veiculos veiculo;
+    private Acessorios acessorio;
     private String dataInicio;
     private String dataFim;
-    private Float valorDaLocacao;
-    private String situacao;
-
-    private int idCliente;
-    private int idVeiculo;
-    private int idMotorista;
-    private int idAcessorios;
-
-    //construtor da classe locação
-    public Locacao(int id, String dataInicio, String dataFim, Float valorDaLocacao, String situacao, int idCliente, int idVeiculo, int idMotorista, int idAcessorios) {
-        this.id = id;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
-        this.valorDaLocacao = valorDaLocacao;
-        this.situacao = situacao;
-        this.idCliente = idCliente;
-        this.idVeiculo = idVeiculo;
-        this.idMotorista = idMotorista;
-        this.idAcessorios = idAcessorios;
-    }
+    private Float valorDaLocação;
+    private Object situacao;
 
     public Locacao() {
-
     }
 
-    //getters e setters da classe locação
-public int getId() {
+    public Locacao(int id, Clientes cliente, Motorista motorista, Veiculos veiculo, Acessorios acessorio, String dataInicio, String dataFim, Float valorDaLocação, Object situacao) {
+        this.id = id;
+        this.cliente = cliente;
+        this.motorista = motorista;
+        this.veiculo = veiculo;
+        this.acessorio = acessorio;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.valorDaLocação = valorDaLocação;
+        this.situacao = situacao;
+    }
+
+    public Object getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(Object situacao) {
+        this.situacao = situacao;
+    }
+
+    public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Clientes getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Clientes cliente) {
+        this.cliente = cliente;
+    }
+
+    public Motorista getMotorista() {
+        return motorista;
+    }
+
+    public void setMotorista(Motorista motorista) {
+        this.motorista = motorista;
+    }
+
+    public Veiculos getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculos veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public Acessorios getAcessorio() {
+        return acessorio;
+    }
+
+    public void setAcessorio(Acessorios acessorio) {
+        this.acessorio = acessorio;
     }
 
     public String getDataInicio() {
@@ -55,62 +92,21 @@ public int getId() {
         this.dataFim = dataFim;
     }
 
-    public Float getValorDaLocacao() {
-        return valorDaLocacao;
+    public Float getValorDaLocação() {
+        return valorDaLocação;
     }
 
-    public void setValorDaLocacao(Float valorDaLocacao) {
-        this.valorDaLocacao = valorDaLocacao;
+    public void setValorDaLocação(Float valorDaLocação) {
+        this.valorDaLocação = valorDaLocação;
     }
 
-    public String getSituacao() {
-        return situacao;
-    }
-
-    public void setSituacao(String situacao) {
-        this.situacao = situacao;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public int getIdVeiculo() {
-        return idVeiculo;
-    }
-
-    public void setIdVeiculo(int idVeiculo) {
-        this.idVeiculo = idVeiculo;
-    }
-
-    public int getIdMotorista() {
-        return idMotorista;
-    }
-
-    public void setIdMotorista(int idMotorista) {
-        this.idMotorista = idMotorista;
-    }
-
-    public int getIdAcessorios() {
-        return idAcessorios;
-    }
-
-    public void setIdAcessorios(int idAcessorios) {
-        this.idAcessorios = idAcessorios;
-    }
-
-
-    //método toString da classe locação
     @Override
     public String toString() {
-        return id + ";" + dataInicio + ";" + dataFim + ";" + valorDaLocacao + ";" + situacao + ";" + idCliente + ";" + idVeiculo + ";" + idMotorista + ";" + idAcessorios;
+        return id + ";" + cliente.getId() + ";" + motorista.getId()  + ";" + veiculo.getId() + ";" + acessorio.getId() + ";" + dataInicio + ";" + dataFim + ";" + valorDaLocação + ";" + situacao;
     }
+    
 
 
 
-
+    }
 }
