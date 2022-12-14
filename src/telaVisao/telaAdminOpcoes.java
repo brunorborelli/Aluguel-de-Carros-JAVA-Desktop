@@ -30,14 +30,14 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         Bt_Cad_Veiculos = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButton2CadastrarMarcas = new javax.swing.JButton();
         Bt_Cad_Cliente = new javax.swing.JButton();
-        Bt_Buscar_Cliente = new javax.swing.JButton();
+        Bt_Cad_Modelos = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-
+        jButton2Locacao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Consulta");
@@ -46,18 +46,18 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         jLabel1.setText("Bem vindo, colaborador!");
 
         Bt_Cad_Veiculos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Bt_Cad_Veiculos.setText("Cadastrar veículos");
+        Bt_Cad_Veiculos.setText("Cad. veículos");
         Bt_Cad_Veiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Bt_Cad_VeiculosActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton2.setText("Buscar veículos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton2CadastrarMarcas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton2CadastrarMarcas.setText("Cad. Marcas");
+        jButton2CadastrarMarcas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton2CadastrarMarcasActionPerformed(evt);
             }
         });
 
@@ -69,11 +69,11 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
             }
         });
 
-        Bt_Buscar_Cliente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Bt_Buscar_Cliente.setText("Buscar Cliente");
-        Bt_Buscar_Cliente.addActionListener(new java.awt.event.ActionListener() {
+        Bt_Cad_Modelos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Bt_Cad_Modelos.setText("Cad. Modelos");
+        Bt_Cad_Modelos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Bt_Buscar_ClienteActionPerformed(evt);
+                Bt_Cad_ModelosActionPerformed(evt);
             }
         });
 
@@ -93,7 +93,6 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
             }
         });
 
-
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton7.setText("Buscar Motorista");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +106,14 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
+            }
+        });
 
+        jButton2Locacao.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton2Locacao.setText("Locaçao de Veículos");
+        jButton2Locacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2LocacaoActionPerformed(evt);
             }
         });
 
@@ -116,58 +122,58 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Bt_Cad_Veiculos)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Bt_Cad_Cliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(Bt_Buscar_Cliente, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(40, Short.MAX_VALUE))
-
+                    .addComponent(jButton2Locacao, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(46, 46, 46)
+                            .addComponent(jLabel1))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(29, 29, 29)
+                                    .addComponent(jButton5))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(27, 27, 27)
+                                    .addComponent(Bt_Cad_Veiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Bt_Cad_Cliente, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton2CadastrarMarcas, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton6)
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Bt_Cad_Modelos, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(31, 31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(Bt_Cad_Marcas, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(Bt_Cad_Veiculos)))
+                .addGap(5, 5, 5)
+                .addComponent(jLabel1)
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Bt_Cad_Cliente)
-                    .addComponent(Bt_Buscar_Cliente))
-
-                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
-                .addGap(26, 26, 26))
-
+                    .addComponent(jButton8)
+                    .addComponent(jButton7))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Bt_Cad_Cliente)
+                    .addComponent(Bt_Cad_Modelos))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Bt_Cad_Veiculos)
+                    .addComponent(jButton2CadastrarMarcas))
+                .addGap(33, 33, 33)
+                .addComponent(jButton2Locacao)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Bt_Cad_Marcas, Bt_Cad_Veiculos});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -181,14 +187,14 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
             f.setVisible(true);
     }//GEN-LAST:event_Bt_Cad_VeiculosActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2CadastrarMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2CadastrarMarcasActionPerformed
         // TODO add your handling code here:
         
-        telaAdminBuscarVeiculo b = new telaAdminBuscarVeiculo();
+        TelaDasMarcas b = new TelaDasMarcas();
             this.dispose();
             b.setVisible(true);
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton2CadastrarMarcasActionPerformed
 
     private void Bt_Cad_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Cad_ClienteActionPerformed
             TelaDeClientes b = new TelaDeClientes();
@@ -208,9 +214,11 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void Bt_Buscar_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Buscar_ClienteActionPerformed
-
-    }//GEN-LAST:event_Bt_Buscar_ClienteActionPerformed
+    private void Bt_Cad_ModelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Cad_ModelosActionPerformed
+        TelaDosModelos b = new TelaDosModelos();
+            this.dispose();
+            b.setVisible(true);
+    }//GEN-LAST:event_Bt_Cad_ModelosActionPerformed
 
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -233,6 +241,13 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
             b.setVisible(true);
         
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton2LocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2LocacaoActionPerformed
+        // TODO add your handling code here:
+        TelaLocacao b = new TelaLocacao();
+            this.dispose();
+            b.setVisible(true);
+    }//GEN-LAST:event_jButton2LocacaoActionPerformed
 
 
     /**
@@ -271,11 +286,11 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Bt_Buscar_Cliente;
     private javax.swing.JButton Bt_Cad_Cliente;
-    private javax.swing.JButton Bt_Cad_Marcas;
+    private javax.swing.JButton Bt_Cad_Modelos;
     private javax.swing.JButton Bt_Cad_Veiculos;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton2CadastrarMarcas;
+    private javax.swing.JButton jButton2Locacao;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
