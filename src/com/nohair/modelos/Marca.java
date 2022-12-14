@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
  * @author dhion
  */
 public class Marca {
+    
     private int id = 0;
     private String descricao = "";
     private String url = "";
