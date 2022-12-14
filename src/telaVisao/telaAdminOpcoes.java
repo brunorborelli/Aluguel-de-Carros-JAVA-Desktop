@@ -200,6 +200,10 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        TelaAdminBuscarMotorista f = new TelaAdminBuscarMotorista();
+            this.dispose();                     // Fechar a tela ao abrir outra janela
+            f.setLocationRelativeTo(null);      // Comando para centralizar a aplicação no centro do monitor
+            f.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed

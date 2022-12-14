@@ -5,6 +5,7 @@ import com.nohair.util.id.GeradorID;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MotoristaDao implements IMotoristaDao {
 
@@ -34,7 +35,24 @@ public class MotoristaDao implements IMotoristaDao {
 
     @Override
     public void alterar(Motorista objeto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Iterator<Motorista> lista = listagem().iterator();
+            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
+            //Criar o buffer do arquivo
+           BufferedWriter bw =new BufferedWriter(fw);
+            while(lista.hasNext()){
+                Motorista aux = lista.next();
+                if(aux.getId()== objeto.getId()){
+                     bw.write(objeto.toString()+"\n");
+                }
+                else{
+                    bw.write(aux.toString()+"\n");
+                }
+               }// GRAVAR NO ARQUIVO OBJETO
+            bw.close();
+         } catch(Exception erro){
+         throw erro;
+        }   
     }
 
     @Override

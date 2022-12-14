@@ -101,27 +101,26 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                               <Component id="jLabel2FotoCNH" min="-2" pref="165" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jTextField1TelefoneMotorista" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2NomeMotorista" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel2NomeMotorista" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="jTextField1NomeMotorista" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel3TelefoneMotorista" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                                  <Component id="jTextField1NomeMotorista" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField1TelefoneMotorista" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel6EnderecoMotorista" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                                   <Component id="jTextField1EnderecoMotorista" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4CNHmotorista" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="jTextField1NumeroCNH" alignment="3" min="-2" max="-2" attributes="0"/>
